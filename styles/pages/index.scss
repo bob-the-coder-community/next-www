@@ -1,0 +1,143 @@
+.landing-page {
+
+	.radial-gradient {
+		height: 300px;
+		width: 100%;
+		background: radial-gradient(42.27% 42.27% at 50% 51.21%, #FADF75 0%, rgba(250, 223, 117, 0) 100%);
+		margin-top: -150px;
+	}
+
+	.hero-lhc {
+		.hero-title {
+			font-weight: bold;
+			font-size: 70px;
+		}	
+
+		.hero-cta {
+			color: $primary;
+			font-size: 20px;
+			font-weight: bold;
+			margin-top: 0px;
+		}
+
+		.hero-description {
+			margin-top: 40px;
+			color: #7B7688;
+			font-family: 'Epilogue', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+			max-width: 400px;
+			line-height: 1.8;
+			font-size: 18px;
+		}
+
+		@media only screen and (max-width: 540px) {
+			.btn-primary {
+				display: block;
+				width: 100%;
+			}
+
+			.hero-description {
+				max-width: 100%;
+			}
+		}			
+	}
+
+	.hero-rhc {
+		.hero-img {
+			max-width: 400px;
+			max-height: 400px;
+			object-fit: contain;
+			display: block;
+			margin: 0 auto;
+		}
+	}
+
+	.launch-letter {
+		padding: 30px 0;
+
+		.alert {
+			max-width: 800px;
+			display: block;
+			margin: 0 auto;
+			padding: 10px 16px;
+			border: 1px solid #000000;
+			border-radius: 4px;
+			color: #7B7688;
+			text-align: center;
+			cursor: pointer;
+	
+			span {
+				margin-right: 15px;
+			}
+	
+			a {
+				text-decoration: none;
+			}
+	
+			strong {
+				color: #000;
+				margin-right: 7px;
+			}
+		}
+	}
+
+	.right-background {
+		height: 600px;
+		width: 600px;
+		background: radial-gradient(46.06% 46.06% at 50% 50%, rgba(255, 106, 65, 0.8) 7.67%, rgba(255, 122, 86, 0.545455) 50.82%, rgba(255, 157, 131, 0) 100%);
+		transform: rotate(0.57deg);	
+		float: right;	
+		margin-right: -300px;
+		margin-top: -300px;
+	}
+
+	.why-should-you-join {
+		padding-top: 50px;
+		display: block;
+
+
+		.section-title {
+			font-size: 44px;
+			font-weight: bold;
+			margin-bottom: 40px;
+		}
+
+		.section-description {
+			max-width: 800px;
+			line-height: 1.9;
+			color: #7B7688;
+			font-size: 18px;
+			font-family: 'Epilogue', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+		}
+
+		.card {
+			border: none;
+			padding: 16px;
+			border-radius: 4px;
+			// max-width: 350px;
+
+			&.teal-card {
+				background-color: #75FACE;
+				transform: rotate(-7.64deg);
+				margin-top: 80px;
+			}
+
+			&.yellow-card {
+				background-color: #FADF75;
+			}
+
+			&.orange-card {
+				background-color: #FF6D45;
+				color: #fff;
+				transform: rotate(2.16deg);
+				margin-top: 40px;
+			}
+
+			ul {
+				li {
+					margin: 20px 0;
+					font-size: 18px;
+				}
+			}
+		}
+	}
+}

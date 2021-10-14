@@ -1,9 +1,10 @@
 import React from 'react';
 import Link from 'next/link';
+import { ENV } from '../../const';
 
 class NavbarComponent extends React.PureComponent<{}> {
     openTelegram(): void {
-        window.open('https://t.me/bob_the_coder_group', '_blank');
+        window.open(ENV.JoinLink, '_blank');
         return;
     }
 
