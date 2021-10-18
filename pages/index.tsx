@@ -103,7 +103,44 @@ class HomePage extends React.PureComponent<{}> {
 											<li>Hendrerit vulputate nisl venenatis amet elementum, sapien, at malesuada praesent.</li>
 										</ul>
 									</div>
-								</div>																
+								</div>
+							</div>
+						</div>
+					</section>
+
+					{/* Daily Challange */}
+					<section className="daily-challange">
+						<div className="container">
+							<div className="custom-message">
+								<div className="d-flex">
+									<div className="msg-container">
+										We have got something for you !!!
+									</div>
+									<img src="/images/wynk.png" alt="Wynk!" />
+								</div>
+							</div>
+
+							<h1 className="section-title">Your Daily Challange</h1>
+							<div className="bullets">
+								{
+									[0, 2, 3, 4, 5].map((i) => (
+										<div className={`bullet ${i === 0 ? 'active' : ''}`} key={i}></div>
+									))
+								}
+							</div>
+							<div className="questions-container">
+								<h6 className="question">
+									Q. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nisi, nec vestibulum, libero lorem. Interdum vel adipiscing ultricies laoreet euismod sit amet ante laoreet.
+								</h6>
+								<div className="answer">
+									<div className="form-group">
+										<textarea rows={10} className="form-control" data-gramm="false" placeholder={'Type your answer here'}></textarea>
+									</div>
+									<div className="d-flex flex-row">
+										<button className="btn btn-outline-primary">Reset</button>
+										<button className="btn btn btn-primary">Submit</button>
+									</div>
+								</div>
 							</div>
 						</div>
 					</section>

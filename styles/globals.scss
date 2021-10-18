@@ -22,6 +22,13 @@ html, body {
 	}
 }
 
+.form-control {
+	&:focus, &:active {
+		outline: none !important;
+		box-shadow: none !important;
+	}	
+}
+
 .btn-primary {
   	color: #fff;
   	transition-delay: .2s;
