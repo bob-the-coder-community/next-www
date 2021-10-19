@@ -8,7 +8,7 @@ class FooterComponent extends React.PureComponent<Props> {
             <footer>
                 <section className="top-section">
                     <div className="container">
-                        <div className="d-flex flex-row">
+                        <div className="d-flex flex-md-row flex-column">
                             <img src="/images/news-letter.png" alt="News Letter" />
                             <div className="subscribe-newsletter">
                                 <h3 className="title">Subscribe to our newsletter</h3>
@@ -23,11 +23,11 @@ class FooterComponent extends React.PureComponent<Props> {
                 </section>
                 <div className="bottom-section">
                     <div className="container">
-                        <div className="d-flex">
-                            <img src="https://via.placeholder.com/200" alt="Logo" />
+                        <div className="d-flex flex-md-row flex-column">
+                            <img src="https://via.placeholder.com/200" alt="Logo" className="footer-logo" />
                             <div className="helpful-links flex-grow-1">
-                                <div className="d-flex">
-                                    <div className="__section">
+                                <div className="d-flex flex-md-row flex-column">
+                                    <div className="__section flex-grow-1">
                                         <h4 className="title">Links</h4>
                                         <ul>
                                             <li>
@@ -44,7 +44,7 @@ class FooterComponent extends React.PureComponent<Props> {
                                             </li>
                                         </ul>
                                     </div>
-                                    <div className="__section">
+                                    <div className="__section flex-grow-1">
                                         <h4 className="title">Community</h4>
                                         <ul>
                                             <li>

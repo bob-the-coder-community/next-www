@@ -124,3 +124,30 @@ footer {
         }
     }
 }
+
+@media only screen and (max-width: 767px) {
+    .footer-logo {
+        display: block;
+        margin: 0 auto;
+    }
+
+    .helpful-links {
+        margin-left: 0px!important;
+        text-align: center;
+    }
+
+    .copyright {
+        text-align: center!important;
+    }
+
+    .__section {
+        width: 100%;
+        margin-top: 30px;
+
+        a {
+            &::before {
+                content: ""!important;
+            }
+        }
+    }
+}

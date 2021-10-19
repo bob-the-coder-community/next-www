@@ -303,4 +303,29 @@
 			}
 		}
 	}
+
+	@media only screen and (max-width: 767px) {
+		.hero-lhc {
+			margin-top: -100px;
+		}
+
+		.right-background {
+			display: none;
+		}
+
+		.teal-card, .yellow-card, .orange-card {
+			margin: 10px 0!important;
+			transform: rotate(0deg)!important;
+		}
+
+		.custom-message {
+			display: none;
+		}
+
+		.highlight {
+			width: 0;
+			height: 0;
+			display: none !important;
+		}
+	}	
 }

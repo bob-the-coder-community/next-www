@@ -10,7 +10,7 @@ html, body {
 }
 
 /** Button */
-.btn {
+.btn, .navbar-toggler {
   	border-radius: 0 !important;
 	outline: none !important;
 	transition-delay: .3s;
@@ -38,6 +38,14 @@ html, body {
 	color: #fff !important;
 	opacity: 1;
 	font-size: 15px;
+}
+
+/** Toggle */
+.navbar-toggler {
+	border-radius: none;
+	border: none;
+	margin-right: 0;
+	padding-right: 0;
 }
 
 /** Pages */

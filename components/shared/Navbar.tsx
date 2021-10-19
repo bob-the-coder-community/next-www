@@ -10,12 +10,12 @@ class NavbarComponent extends React.PureComponent<{}> {
 
     render(): JSX.Element {
         return (
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+            <nav className="navbar navbar-expand-md navbar-dark bg-dark">
                 <div className="container">
-                    <a className="navbar-brand">LOGO</a>
                     <button className="navbar-toggler" type="button">
-                        <span className="navbar-toggler-icon"></span>
+                        <img src="/images/icons/menu.svg" alt="Menu Toggle" />
                     </button>
+                    <a className="navbar-brand">LOGO</a>
                     <div className="d-flex">
                         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                             <div className="navbar-nav">
@@ -30,7 +30,7 @@ class NavbarComponent extends React.PureComponent<{}> {
                                 </Link>
                                 <Link href="/" passHref>
                                     <button className="btn btn-primary btn-sm mx-3 px-4" onClick={this.openTelegram}>Join</button>
-                                </Link>                                
+                                </Link>
                             </div>
                         </div>
                     </div>
