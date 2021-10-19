@@ -1,6 +1,12 @@
-.launch-letter-page, .about-us-page {
+.launch-letter-page, .about-us-page, .privacy-policy-page, .terms-of-service-page {
     min-height: 90vh;
     margin: 100px 0;
+
+    .sub-title {
+        margin-top: 50px;
+        font-size: 22px;
+        margin-bottom: 20px;
+    }
 
     .green-box {
         height: 400px;

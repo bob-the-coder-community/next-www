@@ -58,10 +58,7 @@ class FooterComponent extends React.PureComponent<Props> {
                                                 <a href="/legal/privacy-policy">Privacy Policy</a>
                                             </li>
                                             <li>
-                                                <a href="/legal/terms-of-service">Terms of Service</a>
-                                            </li>
-                                            <li>
-                                                <a href="/legal/terms-of-service">GitHub</a>
+                                                <a href="https://github.com/bob-the-coder-community" target="_blank">GitHub</a>
                                             </li>                                            
                                         </ul>
                                     </div>
