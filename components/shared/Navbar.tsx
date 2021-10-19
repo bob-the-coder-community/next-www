@@ -30,9 +30,9 @@ class NavbarComponent extends React.PureComponent<{}> {
                                 <Link href="/about" passHref>
                                     <a className="nav-link just-link mx-3">About</a>
                                 </Link>
-                                <Link href="/contact" passHref>
-                                    <a className="nav-link just-link mx-3">Contact</a>
-                                </Link>
+                                <Link href="/code-of-conduct" passHref>
+                                    <a className="nav-link just-link mx-3">Code of Conduct</a>
+                                </Link>                                
                                 <Link href="/" passHref>
                                     <button className="btn btn-primary btn-sm mx-3 px-4" onClick={this.openTelegram}>Join</button>
                                 </Link>
