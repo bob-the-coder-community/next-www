@@ -1,4 +1,4 @@
-.launch-letter-page {
+.launch-letter-page, .about-us-page {
     min-height: 90vh;
     margin: 100px 0;
 
@@ -8,6 +8,14 @@
         margin-top: -300px;
         margin-left: -200px;
         background: radial-gradient(43.87% 43.87% at 50% 50%, #75FACE 0%, rgba(117, 250, 206, 0) 92.23%);
+    }
+
+    .yellow-box {
+		height: 300px;
+		width: 100%;
+		background: radial-gradient(42.27% 42.27% at 50% 51.21%, #FADF75 0%, rgba(250, 223, 117, 0) 100%);
+		margin-top: -200px;
+        margin-bottom: 0px;
     }
 
     .page-title {
