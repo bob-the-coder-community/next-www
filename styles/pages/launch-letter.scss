@@ -1,0 +1,32 @@
+.launch-letter-page {
+    min-height: 90vh;
+    margin: 100px 0;
+
+    .green-box {
+        height: 400px;
+        width: 400px;
+        margin-top: -300px;
+        margin-left: -200px;
+        background: radial-gradient(43.87% 43.87% at 50% 50%, #75FACE 0%, rgba(117, 250, 206, 0) 92.23%);
+    }
+
+    .page-title {
+        font-size: 40px;
+        font-weight: 700;
+        font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        line-height: 96px;
+        margin-top: -100px;
+        color: #03020D;
+    }
+
+    p {
+        font-size: 18px;
+        line-height: 38px;
+        font-family: 'Epilogue', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        color: #7B7688;
+
+        strong {
+            color: #03020D;
+        }
+    }
+}
