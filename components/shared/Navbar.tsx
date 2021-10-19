@@ -15,7 +15,12 @@ class NavbarComponent extends React.PureComponent<{}> {
                     <button className="navbar-toggler" type="button">
                         <img src="/images/icons/menu.svg" alt="Menu Toggle" />
                     </button>
-                    <a className="navbar-brand">LOGO</a>
+                    <Link href="/" passHref>
+                        <a className="navbar-brand">
+                            &#60;/&#62;
+                            bobTheCoder
+                        </a>
+                    </Link>
                     <div className="d-flex">
                         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                             <div className="navbar-nav">
