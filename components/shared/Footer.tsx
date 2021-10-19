@@ -1,4 +1,5 @@
 import React from 'react';
+import { ENV } from '../../const';
 
 type Props = {};
 
@@ -27,7 +28,7 @@ class FooterComponent extends React.PureComponent<Props> {
                             <img src="https://via.placeholder.com/200" alt="Logo" className="footer-logo" />
                             <div className="helpful-links flex-grow-1">
                                 <div className="d-flex flex-md-row flex-column">
-                                    <div className="__section flex-grow-1">
+                                    <div className="__section">
                                         <h4 className="title">Links</h4>
                                         <ul>
                                             <li>
@@ -44,11 +45,11 @@ class FooterComponent extends React.PureComponent<Props> {
                                             </li>
                                         </ul>
                                     </div>
-                                    <div className="__section flex-grow-1">
+                                    <div className="__section">
                                         <h4 className="title">Community</h4>
                                         <ul>
                                             <li>
-                                                <a href="/join">Join</a>
+                                                <a href={ENV.JoinLink} target="_blank">Join</a>
                                             </li>
                                             <li>
                                                 <a href="/code-of-conduct">Code of Conduct</a>
@@ -59,6 +60,9 @@ class FooterComponent extends React.PureComponent<Props> {
                                             <li>
                                                 <a href="/legal/terms-of-service">Terms of Service</a>
                                             </li>
+                                            <li>
+                                                <a href="/legal/terms-of-service">GitHub</a>
+                                            </li>                                            
                                         </ul>
                                     </div>
                                 </div>
