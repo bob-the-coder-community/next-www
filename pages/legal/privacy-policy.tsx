@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import React from 'react';
 import PrimaryLayout from '../../components/layouts/PrimaryLayout';
 
@@ -7,6 +8,19 @@ class PrivacyPolicyPage extends React.PureComponent<Props> {
     render(): JSX.Element {
         return (
             <PrimaryLayout>
+				<Head>
+					<title>Privacy Policy - bobTheCoder.org</title>
+					<meta name="title" content="Privacy Policy - bobTheCoder.org" />
+
+					<meta property="og:type" content="website" />
+					<meta property="og:url" content="https://bobthecoder.org/legal/privacy-policy" />
+					<meta property="og:title" content="Privacy Policy - bobTheCoder.org" />
+
+					<meta property="twitter:card" content="summary_large_image" />
+					<meta property="twitter:url" content="https://bobthecoder.org/legal/privacy-policy" />
+					<meta property="twitter:title" content="Privacy Policy - bobTheCoder.org" />
+				</Head>
+                                
                 <div className="container">
                     <section className="privacy-policy-page">
                         <div className="yellow-box" />

@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import React from 'react';
 import PrimaryLayout from '../components/layouts/PrimaryLayout';
 
@@ -7,6 +8,19 @@ class AboutPage extends React.PureComponent<Props> {
     render(): JSX.Element {
         return (
             <PrimaryLayout>
+				<Head>
+					<title>About - bobTheCoder.org</title>
+					<meta name="title" content="About - bobTheCoder" />
+
+					<meta property="og:type" content="website" />
+					<meta property="og:url" content="https://bobthecoder.org/about" />
+					<meta property="og:title" content="About - bobTheCoder" />
+
+					<meta property="twitter:card" content="summary_large_image" />
+					<meta property="twitter:url" content="https://bobthecoder.org/about" />
+					<meta property="twitter:title" content="About - bobTheCoder" />
+				</Head>
+                                
                 <section className="about-us-page">
                     <div className="yellow-box" />
                     <div className="container">

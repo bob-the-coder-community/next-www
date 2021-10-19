@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import Head from 'next/head';
 import { NextPage } from 'next';
 import { ENV } from '../const';
 import PrimaryLayout from '../components/layouts/PrimaryLayout';
@@ -14,6 +15,22 @@ class HomePage extends React.PureComponent<{}> {
 	render(): JSX.Element {
 		return (
 			<PrimaryLayout>
+				<Head>
+					<title>bobTheCoder.org - Exclusing JavaScript Community</title>
+					<meta name="title" content="bobTheCoder - Exclusing JavaScript Community" />
+					<meta name="description" content="Bob the Coder began with the goal of providing an open community for coders. A community where all JavaScript problems, from the fundamentals to the advanced, are addressed and are freely available to everybody.🚀" />
+
+					<meta property="og:type" content="website" />
+					<meta property="og:url" content="https://bobthecoder.org/" />
+					<meta property="og:title" content="bobTheCoder - Exclusing JavaScript Community" />
+					<meta property="og:description" content="Bob the Coder began with the goal of providing an open community for coders. A community where all JavaScript problems, from the fundamentals to the advanced, are addressed and are freely available to everybody.🚀" />
+
+					<meta property="twitter:card" content="summary_large_image" />
+					<meta property="twitter:url" content="https://bobthecoder.org/" />
+					<meta property="twitter:title" content="bobTheCoder - Exclusing JavaScript Community" />
+					<meta property="twitter:description" content="Bob the Coder began with the goal of providing an open community for coders. A community where all JavaScript problems, from the fundamentals to the advanced, are addressed and are freely available to everybody.🚀" />
+				</Head>
+
 				<div className="landing-page">
 					<section className="hero-section">
 						<div className="container">

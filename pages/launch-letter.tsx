@@ -1,4 +1,5 @@
 import React from 'react';
+import Head from 'next/head';
 import PrimaryLayout from '../components/layouts/PrimaryLayout';
 
 type Props = {};
@@ -7,6 +8,19 @@ class LaunchLetter extends React.PureComponent<Props> {
     render(): JSX.Element {
         return (
             <PrimaryLayout>
+				<Head>
+					<title>🚀 Launch Letter - bobTheCoder.org</title>
+					<meta name="title" content="🚀 Launch Letter - bobTheCoder" />
+
+					<meta property="og:type" content="website" />
+					<meta property="og:url" content="https://bobthecoder.org/launch-letter" />
+					<meta property="og:title" content="🚀 Launch Letter - bobTheCoder" />
+
+					<meta property="twitter:card" content="summary_large_image" />
+					<meta property="twitter:url" content="https://bobthecoder.org/launch-letter" />
+					<meta property="twitter:title" content="🚀 Launch Letter - bobTheCoder" />
+				</Head>
+                                
                 <section className="launch-letter-page">
                     <div className="green-box" />
                     <div className="container">

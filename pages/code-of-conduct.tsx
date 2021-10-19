@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import React from 'react';
 import PrimaryLayout from '../components/layouts/PrimaryLayout';
 
@@ -7,6 +8,19 @@ class CodeOfConductPage extends React.PureComponent<Props> {
     render(): JSX.Element {
         return (
             <PrimaryLayout>
+				<Head>
+					<title>Code of Conduct - bobTheCoder.org</title>
+					<meta name="title" content="Code of Conduct - bobTheCoder.org" />
+
+					<meta property="og:type" content="website" />
+					<meta property="og:url" content="https://bobthecoder.org/code-of-conduct" />
+					<meta property="og:title" content="Code of Conduct - bobTheCoder.org" />
+
+					<meta property="twitter:card" content="summary_large_image" />
+					<meta property="twitter:url" content="https://bobthecoder.org/code-of-conduct" />
+					<meta property="twitter:title" content="Code of Conduct - bobTheCoder.org" />
+				</Head>
+                                
                 <div className="container">
                     <div className="code-of-conduct-page">
                         <div className="yellow-box" />
