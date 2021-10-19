@@ -1,4 +1,5 @@
 import React from 'react';
+import FooterComponent from '../shared/Footer';
 import NavbarComponent from '../shared/Navbar';
 
 class PrimaryLayout extends React.PureComponent<{}> {
@@ -11,6 +12,7 @@ class PrimaryLayout extends React.PureComponent<{}> {
                 <main>
                     {children}
                 </main>
+                <FooterComponent />
             </>
         )
     }
