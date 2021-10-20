@@ -49,7 +49,7 @@ class HomePage extends React.PureComponent<{}> {
 										We are a fast growing JS community with a goal of helping developers make most of the ecosystem.
 									</p>
 									<button className="btn btn-primary mt-4 px-5" onClick={this.openTelegram}>
-										Join
+										Join now
 									</button>
 								</div>
 								<div className="hero-rhc d-none d-md-block">
