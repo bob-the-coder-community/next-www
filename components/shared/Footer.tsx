@@ -33,9 +33,6 @@ class FooterComponent extends React.PureComponent<Props> {
                                         <ul>
                                             <li>
                                                 <a href="/">Home</a>
-                                            </li>                                            
-                                            <li>
-                                                <a href="/contact">Contact</a>
                                             </li>
                                             <li>
                                                 <a href="/about">About</a>
@@ -59,16 +56,24 @@ class FooterComponent extends React.PureComponent<Props> {
                                             </li>
                                             <li>
                                                 <a href="https://github.com/bob-the-coder-community" target="_blank">GitHub</a>
-                                            </li>                                            
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <hr />
-                        <p className="copyright">
-                            © 2021 Bob the coder. All rights reserved.
-                        </p>
+                        <div className="d-flex flex-md-row flex-column justify-content-between align-items-center">
+                            <p className="copyright left">
+                                © 2021 Bob the coder. All rights reserved.
+                            </p>
+                            <p className="copyright">
+                                <a href="https://netlify.com" target="_blank">
+                                    This site is powered by
+                                    <img src="/images/icons/netlify-logo.png" alt="Netlify Logo" />
+                                </a>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </footer>
