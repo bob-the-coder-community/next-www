@@ -13,7 +13,9 @@ class FooterComponent extends React.PureComponent<Props> {
                             <img src="/images/news-letter.png" alt="News Letter" />
                             <div className="subscribe-newsletter">
                                 <h3 className="title">Subscribe to our newsletter</h3>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae iure ea, autem dolores, nostrum in sequi a necessitatibus deserunt vel repudiandae dolor voluptas odit, ipsa dolorum ipsum error voluptatem dignissimos.</p>
+                                <p>
+                                    Looking for exciting new updates in the ever changing world of JavaScript?  Sign up to our weekly Newsletter and stay up to date.
+                                </p>
                                 <div className="d-flex">
                                     <input type="text" name="" id="" placeholder="Enter your email address..." className="form-control" />
                                     <button className="btn btn-dark">Subscribe</button>

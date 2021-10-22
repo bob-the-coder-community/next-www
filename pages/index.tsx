@@ -16,18 +16,18 @@ class HomePage extends React.PureComponent<{}> {
 		return (
 			<PrimaryLayout>
 				<Head>
-					<title>bobTheCoder.org - Exclusing JavaScript Community</title>
-					<meta name="title" content="bobTheCoder - Exclusing JavaScript Community" />
+					<title>bobTheCoder.org - Exclusive JavaScript Community</title>
+					<meta name="title" content="bobTheCoder - Exclusive JavaScript Community" />
 					<meta name="description" content="Bob the Coder began with the goal of providing an open community for coders. A community where all JavaScript problems, from the fundamentals to the advanced, are addressed and are freely available to everybody.🚀" />
 
 					<meta property="og:type" content="website" />
 					<meta property="og:url" content="https://bobthecoder.org/" />
-					<meta property="og:title" content="bobTheCoder - Exclusing JavaScript Community" />
+					<meta property="og:title" content="bobTheCoder - Exclusive JavaScript Community" />
 					<meta property="og:description" content="Bob the Coder began with the goal of providing an open community for coders. A community where all JavaScript problems, from the fundamentals to the advanced, are addressed and are freely available to everybody.🚀" />
 
 					<meta property="twitter:card" content="summary_large_image" />
 					<meta property="twitter:url" content="https://bobthecoder.org/" />
-					<meta property="twitter:title" content="bobTheCoder - Exclusing JavaScript Community" />
+					<meta property="twitter:title" content="bobTheCoder - Exclusive JavaScript Community" />
 					<meta property="twitter:description" content="Bob the Coder began with the goal of providing an open community for coders. A community where all JavaScript problems, from the fundamentals to the advanced, are addressed and are freely available to everybody.🚀" />
 				</Head>
 
@@ -46,7 +46,7 @@ class HomePage extends React.PureComponent<{}> {
 										Exclusive community for JS developer
 									</h6>
 									<p className="hero-description">
-										We are a fast growing JS community with a goal of helping developers make most of the ecosystem.
+										bobTheCoder is one of the newest, fast growing DEV communities on the block, aiming to help you explore the world of JS with a new perspective.
 									</p>
 									<button className="btn btn-primary mt-4 px-5" onClick={this.openTelegram}>
 										Join now
@@ -89,36 +89,40 @@ class HomePage extends React.PureComponent<{}> {
 							<p className="section-description">
 								Bob the coder is a fast-growing JS community in India. We help developers make the most of the ecosystem and find relevant opportunities.
 							</p>
-							<p className="section-description">
-								Didn't convince? Read what our members say about us
-							</p>
-
 							<div className="row mt-5">
 								<div className="col-md-4 col-12">
 									<div className="card teal-card">
-										<ul>
-											<li>We curate a short & important updates from JS ecosystem. Get to know whats happening in less than a minute.</li>
-											<li>We create a very simple yet challenging JS quiz.</li>
-											<li>Our deep connection with hottest startups brings in opportunity that helps you learn and earn well.</li>
-										</ul>
+										<p>
+											Bob The Coder as a community has also launched a new initiative to help our members get placed in some exciting new roles to help jump start their careers.
+										</p>
+										<p>
+											We have an active recruitment base to help our members find their dream jobs and connect them with some of the top companies/startups in and around the country.
+										</p>
+										<p>
+											We take care of the entire recruitment process and filter out our candidates on various levels and prepare them for some of the most challenging roles out there.
+										</p>
 									</div>
 								</div>
 								<div className="col-md-4 col-12">
 									<div className="card yellow-card">
 										<ul>
-											<li>Daily JS updates</li>
-											<li>Weekly JS quiz</li>
-											<li>Job offers from hot startups</li>
+											<li>Active community experience with daily updates on the JS world.</li>
+											<li>Intellectual discussions on everything JavaScript and more.</li>
+											<li>Blogs and quizzes for the members to help and understand JavaScript better. </li>
 										</ul>
 									</div>
 								</div>
 								<div className="col-md-4 col-12">
 									<div className="card orange-card">
-										<ul>
-											<li>Turpis lectus facilisi ut ut dignissim ipsum sapien in massa.</li>
-											<li>Hendrerit vulputate nisl venenatis amet elementum, sapien, at malesuada praesent.</li>
-											<li>Hendrerit vulputate nisl venenatis amet elementum, sapien, at malesuada praesent.</li>
-										</ul>
+										<p>
+											We have created an evolving community of young minds to discuss and deliberate their JS queries with our experts in the community.
+										</p>
+										<p>
+											Daily updates on the happenings of JavaScript are posted on the group to keep our members up to date with the latest developments in the JS world.
+										</p>
+										<p>
+											Weekly quizzes to help improve the performance of members with challenging tasks and projects designed and developed by our team.
+										</p>
 									</div>
 								</div>
 							</div>
