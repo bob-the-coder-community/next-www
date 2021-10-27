@@ -29,9 +29,10 @@ html, body {
 	}	
 }
 
-.btn-primary {
+.btn-primary, .btn-success {
   	color: #fff;
   	transition-delay: .2s;
+	font-weight: bold;
 }
 
 .nav-link {

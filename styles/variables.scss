@@ -1,7 +1,11 @@
 $primary: #FF6D45;
 $dark: #000;
+$success: #75FACE;
+$danger: #C62828;
 
 $theme-colors: (
   "primary": $primary,
-  "dark": $dark
+  "dark": $dark,
+  "success": $success,
+  "danger": $danger,
 );

@@ -52,6 +52,8 @@ footer {
 
             button {
                 padding: 10px 20px;
+                transition: width 2s;
+                transition-timing-function: ease;
             }
         }
     }

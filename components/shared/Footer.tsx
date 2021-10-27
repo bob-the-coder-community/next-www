@@ -1,26 +1,86 @@
-import React from 'react';
+import React, { createRef } from 'react';
 import { ENV } from '../../const';
+import ActionButton from '../ActionButton';
+import { Formik, FormikHelpers } from 'formik';
+import * as yup from 'yup';
+
+const BUTTON_REF: React.LegacyRef<ActionButton> = createRef();
 
 type Props = {};
+type State = {
+    newsletter_status: 'prestine' | 'loading' | 'success';
+};
 
-class FooterComponent extends React.PureComponent<Props> {
+type Form = {
+    email_address: string;
+}
+class FooterComponent extends React.PureComponent<Props, State> {
+    async submit(value: Form, helpers: FormikHelpers<Form>): Promise<void> {
+        try {
+            // @ts-ignore
+            BUTTON_REF.current.changeStatus('loading');
+            await fetch('/api/newsletter', {
+                method: 'POST',
+                headers: new Headers({
+                    'content-type': 'application/json',
+                }),
+                body: JSON.stringify({
+                    email: value.email_address,
+                }),
+            });
+
+            helpers.resetForm();
+
+            // @ts-ignore
+            BUTTON_REF.current.changeStatus('complete');
+        } catch (err) {
+            console.error(err);
+            // @ts-ignore
+            BUTTON_REF.current.changeStatus('error');            
+        }
+    }
+
     render(): JSX.Element {
+        const Form = {
+            InitialValues: {
+                email_address: '',
+            },
+            Validations: yup.object({
+                email_address: yup.string().required('Email address is required').email('Enter a valid email address'),
+            }),
+        }
+
         return (
             <footer>
                 <section className="top-section">
                     <div className="container">
                         <div className="d-flex flex-md-row flex-column">
                             <img src="/images/news-letter.png" alt="News Letter" />
-                            <div className="subscribe-newsletter">
-                                <h3 className="title">Subscribe to our newsletter</h3>
-                                <p>
-                                    Looking for exciting new updates in the ever changing world of JavaScript?  Sign up to our weekly Newsletter and stay up to date.
-                                </p>
-                                <div className="d-flex">
-                                    <input type="text" name="" id="" placeholder="Enter your email address..." className="form-control" />
-                                    <button className="btn btn-dark">Subscribe</button>
-                                </div>
-                            </div>
+                            <Formik initialValues={Form.InitialValues} validationSchema={Form.Validations} onSubmit={this.submit}>
+                                {
+                                    (props) => (
+                                        <form onSubmit={props.handleSubmit}>
+                                            <div className="subscribe-newsletter">
+                                                <h3 className="title">Subscribe to our newsletter</h3>
+                                                <p>
+                                                    Looking for exciting new updates in the ever changing world of JavaScript?  Sign up to our weekly Newsletter and stay up to date.
+                                                </p>
+                                                <div className="d-flex">
+                                                    <input value={props.values.email_address} autoComplete="off" type="email" name="email_address" onFocus={() => props.setTouched({ email_address: true })} onChange={props.handleChange} placeholder="Enter your email address..." className="form-control" />
+                                                    <ActionButton ref={BUTTON_REF} text={'Subscribe'} onClick={() => props.handleSubmit()} />
+                                                </div>
+                                                {
+                                                    props.errors.email_address && props.touched.email_address && (
+                                                        <small className="text-danger">
+                                                            <strong>{ props.errors.email_address }</strong>
+                                                        </small>
+                                                    )
+                                                }
+                                            </div>
+                                        </form>
+                                    )
+                                }
+                            </Formik>
                         </div>
                     </div>
                 </section>
