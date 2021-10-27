@@ -2,7 +2,8 @@
 import axios, { AxiosResponse } from 'axios';
 import dayjs from 'dayjs';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { ENV } from '../../const';
+
+const API_KEY = process.env.NoCodeAPIKey;
 
 type Response = {
 	status: number;
@@ -29,8 +30,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 			smtp_connect: string;
 			is_deliverable: boolean;
 			status: string;
-		}> = await axios.get(`https://v1.nocodeapi.com/bobtehcoder/email-verify/erYMqNFtODbngFqW?email=${email}&api_key=${ ENV.NoCodeAPI.API_KEY }`);
-		await axios.post(`https://v1.nocodeapi.com/bobtehcoder/google_sheets/yHcXGbJVflxgYwCu?tabId=List&api_key=${ ENV.NoCodeAPI.API_KEY }`, [
+		}> = await axios.get(`https://v1.nocodeapi.com/bobtehcoder/email-verify/erYMqNFtODbngFqW?email=${email}&api_key=${ API_KEY }`);
+		await axios.post(`https://v1.nocodeapi.com/bobtehcoder/google_sheets/yHcXGbJVflxgYwCu?tabId=List&api_key=${ API_KEY }`, [
 			[
 				dayjs().format('HH:mm DD MMM YYYY'),
 				email,

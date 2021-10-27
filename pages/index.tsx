@@ -2,17 +2,25 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Head from 'next/head';
-import { NextPage } from 'next';
 import { ENV } from '../const';
+import { Blog } from '../types/Blogs';
 import PrimaryLayout from '../components/layouts/PrimaryLayout';
+import BlogsComponent from '../components/Blogs';
 
-class HomePage extends React.PureComponent<{}> {
+
+type Props = {
+	blogs: Blog[];
+}
+
+class HomePage extends React.PureComponent<Props> {
 	openTelegram(): void {
 		window.open(ENV.JoinLink, '_blank');
 		return;
 	}
 
 	render(): JSX.Element {
+		const { blogs } = this.props;
+
 		return (
 			<PrimaryLayout>
 				<Head>
@@ -167,38 +175,35 @@ class HomePage extends React.PureComponent<{}> {
 					</section>
 
 					{/* Blogs */}
-					<section className="blogs">
-						<div className="container">
-							<h1 className="section-title">Our Blogs</h1>
-							<div className="highlight" />
-
-							<div className="blogs">
-								<div className="row">
-									{
-										[1, 2, 3].map((i) => (
-											<div className="col-md-4 col-12" key={i}>
-												<div className="blog-card">
-													<img src="https://source.unsplash.com/random" alt="Blog Title" />
-													<h4 className="blog-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h4>
-													<p className="blog-description">
-														Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nemo eaque sit adipisci animi temporibus veritatis omnis maxime dolor minus, saepe nesciunt alias commodi itaque fugit accusamus officia doloremque, eos quidem!
-														<span className="read-more">more...</span>
-													</p>
-												</div>
-											</div>
-										))
-									}
-									<div className="col-12">
-										<button className="btn btn-primary">READ MORE</button>
-									</div>
-								</div>
-							</div>
-						</div>
-					</section>
+					<BlogsComponent blogs={blogs} />
 				</div>
 			</PrimaryLayout>
 		)
 	}
 }
 
-export default HomePage as NextPage;
+export async function getServerSideProps() {
+    try {
+        const response = await fetch(`${ ENV.baseUrl }/blogs`, {
+            method: 'GET',
+            headers: new Headers({
+                'content-type': 'application/json',
+            }),
+        });
+
+        const data = await response.json();
+        return {
+            props: {
+                blogs: data.message,
+            }
+        }
+    } catch (err) {
+        return {
+            props: {
+				blogs: [],
+			}
+        }
+    }
+}
+
+export default HomePage;

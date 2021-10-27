@@ -87,7 +87,7 @@ class FooterComponent extends React.PureComponent<Props, State> {
                 <div className="bottom-section">
                     <div className="container">
                         <div className="d-flex flex-md-row flex-column">
-                            <img src="https://via.placeholder.com/200" alt="Logo" className="footer-logo" />
+                            <img src="/images/logo/white.png" alt="Logo" className="footer-logo" />
                             <div className="helpful-links flex-grow-1">
                                 <div className="d-flex flex-md-row flex-column">
                                     <div className="__section">
