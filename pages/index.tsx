@@ -32,11 +32,13 @@ class HomePage extends React.PureComponent<Props> {
 					<meta property="og:url" content="https://bobthecoder.org/" />
 					<meta property="og:title" content="bobTheCoder - Exclusive JavaScript Community" />
 					<meta property="og:description" content="Bob the Coder began with the goal of providing an open community for coders. A community where all JavaScript problems, from the fundamentals to the advanced, are addressed and are freely available to everybody.🚀" />
+					<meta property="og:image" content="/images/thumbanil.jpg" />
 
 					<meta property="twitter:card" content="summary_large_image" />
 					<meta property="twitter:url" content="https://bobthecoder.org/" />
 					<meta property="twitter:title" content="bobTheCoder - Exclusive JavaScript Community" />
 					<meta property="twitter:description" content="Bob the Coder began with the goal of providing an open community for coders. A community where all JavaScript problems, from the fundamentals to the advanced, are addressed and are freely available to everybody.🚀" />
+					<meta property="twitter:image" content="/images/thumbanil.jpg" />
 				</Head>
 
 				<div className="landing-page">
