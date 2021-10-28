@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import axios, { AxiosResponse } from 'axios';
 import { Blog } from '../../types/Blogs';
+import { withSentry } from "@sentry/nextjs";
 
 const API_KEY = process.env.NoCodeAPIKey;
 
@@ -8,7 +9,8 @@ type Response = {
 	status: number;
 	message: string | object;
 }
-export default async function handler(req: NextApiRequest, res: NextApiResponse<Response>) {
+
+async function handler(req: NextApiRequest, res: NextApiResponse<Response>) {
     try {
         const response: AxiosResponse<{
             data: Blog[];
@@ -34,3 +36,5 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 		return;
 	}
 }
+
+export default withSentry(handler);

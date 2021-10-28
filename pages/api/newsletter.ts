@@ -2,6 +2,7 @@
 import axios, { AxiosResponse } from 'axios';
 import dayjs from 'dayjs';
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { withSentry } from "@sentry/nextjs";
 
 const API_KEY = process.env.NoCodeAPIKey;
 
@@ -10,7 +11,7 @@ type Response = {
 	message: string;
 }
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse<Response>) {
+async function handler(req: NextApiRequest, res: NextApiResponse<Response>) {
 	try {
 		if (req.method !== 'POST') {
 			res.status(405).json({
@@ -63,3 +64,5 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 		return;
 	}
 }
+
+export default withSentry(handler);

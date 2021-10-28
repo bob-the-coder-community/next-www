@@ -1,10 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { withSentry } from "@sentry/nextjs";
 
 type Response = {
 	status: number;
 	message: string;
 }
-export default async function handler(req: NextApiRequest, res: NextApiResponse<Response>) {
+
+async function handler(req: NextApiRequest, res: NextApiResponse<Response>) {
     try {
         const { url } = <{ url: string }>req.query;
 
@@ -25,3 +27,5 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 		return;
 	}
 }
+
+export default withSentry(handler);
