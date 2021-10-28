@@ -184,7 +184,7 @@ class HomePage extends React.PureComponent<Props> {
 
 export async function getServerSideProps() {
     try {
-        const response = await fetch(`${ ENV.baseUrl }/blogs`, {
+        const response = await fetch(`${ process.env.BaseEndpoint }/blogs`, {
             method: 'GET',
             headers: new Headers({
                 'content-type': 'application/json',
