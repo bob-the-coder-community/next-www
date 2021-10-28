@@ -27,7 +27,7 @@ class NavbarComponent extends React.PureComponent<{}> {
                                 <Link href="/" passHref>
                                     <a className="nav-link just-link mx-3">Home</a>
                                 </Link>
-                                <Link href="/about" passHref>
+                                <Link href="/launch-letter" passHref>
                                     <a className="nav-link just-link mx-3">About</a>
                                 </Link>
                                 <Link href="/code-of-conduct" passHref>

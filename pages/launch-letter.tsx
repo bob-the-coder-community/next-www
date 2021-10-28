@@ -49,9 +49,18 @@ class LaunchLetter extends React.PureComponent<Props> {
                         <p>
                             What’s more!? We hope to be launching android and apple apps for the community in a while. Although we’re new, stay assured, the people behind the face of the community are people who’ve been on the field for a long time now and have extensive knowledge about Javascript and its nuances!
                         </p>
-                        <p>
-                            <strong>-- Sanjay & Pragathi</strong>
-                        </p>
+                        <div className="d-flex">
+                            <div className="person">
+                                <img src="/images/people/sanjay-achar.png" alt="Sanjay Achar" className="picture" />
+                                <h1>Sanjay Achar</h1>
+                                <p>Founder</p>
+                            </div>
+                            <div className="person">
+                                <img src="/images/people/pragathi-muthanna.png" alt="Pragathi Muthanna" className="picture" />
+                                <h1>Pragathi Muthanna</h1>
+                                <p>Community Manager</p>
+                            </div>                            
+                        </div>
                     </div>
                 </section>
             </PrimaryLayout>

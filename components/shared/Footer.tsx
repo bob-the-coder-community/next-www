@@ -96,9 +96,9 @@ class FooterComponent extends React.PureComponent<Props, State> {
                                             <li>
                                                 <a href="/">Home</a>
                                             </li>
-                                            <li>
+                                            {/* <li>
                                                 <a href="/about">About</a>
-                                            </li>
+                                            </li> */}
                                             <li>
                                                 <a href="/launch-letter">Launch Letter</a>
                                             </li>
@@ -127,7 +127,7 @@ class FooterComponent extends React.PureComponent<Props, State> {
                         <hr />
                         <div className="d-flex flex-md-row flex-column justify-content-between align-items-center">
                             <p className="copyright left">
-                                © 2021 Bob the coder. All rights reserved.
+                                © {(new Date()).getFullYear()} Bob the coder. All rights reserved.
                             </p>
                             <p className="copyright">
                                 <a href="https://netlify.com" target="_blank">

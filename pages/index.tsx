@@ -138,7 +138,7 @@ class HomePage extends React.PureComponent<Props> {
 					</section>
 
 					{/* Daily Challange */}
-					<section className="daily-challange">
+					{/* <section className="daily-challange">
 						<div className="container">
 							<div className="custom-message">
 								<div className="d-flex">
@@ -172,7 +172,7 @@ class HomePage extends React.PureComponent<Props> {
 								</div>
 							</div>
 						</div>
-					</section>
+					</section> */}
 
 					{/* Blogs */}
 					<BlogsComponent blogs={blogs} />
