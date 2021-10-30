@@ -1,8 +1,8 @@
 import React from 'react';
-import { Blog } from '../types/Blogs';
+import { Blogs } from '../types/Blogs';
 
 type Props = {
-    blogs: Blog[];
+    blogs: Blogs[];
 };
 
 class BlogsComponent extends React.PureComponent<Props> {
@@ -24,9 +24,9 @@ class BlogsComponent extends React.PureComponent<Props> {
                         <div className="row">
                             {
                                 blogs.map((blog) => (
-                                    <div className="col-md-4 col-12" key={blog.row_id} onClick={() => this.openBlog(blog.Link)}>
+                                    <div className="col-md-4 col-12" key={blog._id} onClick={() => this.openBlog(blog.Link)}>
                                         <div className="blog-card">
-                                            <img src={blog.Thumbanil} alt={blog.Title} />
+                                            <img src={blog.Thumbanil.formats.large.url} alt={blog.Title} />
                                             <h4 className="blog-title">{blog.Title}</h4>
                                             <p className="blog-description">
                                                 {blog.Description}

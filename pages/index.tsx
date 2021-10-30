@@ -3,13 +3,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Head from 'next/head';
 import { ENV } from '../const';
-import { Blog } from '../types/Blogs';
+import { Blogs } from '../types/Blogs';
 import PrimaryLayout from '../components/layouts/PrimaryLayout';
 import BlogsComponent from '../components/Blogs';
 
 
 type Props = {
-	blogs: Blog[];
+	blogs: Blogs[];
 }
 
 class HomePage extends React.PureComponent<Props> {
@@ -186,7 +186,7 @@ class HomePage extends React.PureComponent<Props> {
 
 export async function getServerSideProps() {
     try {
-        const response = await fetch(`${ process.env.BaseEndpoint }/blogs`, {
+        const response = await fetch(`${ ENV.baseUrl }/blogs`, {
             method: 'GET',
             headers: new Headers({
                 'content-type': 'application/json',
@@ -196,7 +196,7 @@ export async function getServerSideProps() {
         const data = await response.json();
         return {
             props: {
-                blogs: data.message,
+                blogs: data,
             }
         }
     } catch (err) {

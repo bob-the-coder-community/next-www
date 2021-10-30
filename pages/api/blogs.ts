@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import axios, { AxiosResponse } from 'axios';
-import { Blog } from '../../types/Blogs';
+import { Blogs } from '../../types/Blogs';
+import { withSentry } from "@sentry/nextjs";
 
 const API_KEY = process.env.NoCodeAPIKey;
 
@@ -8,10 +9,11 @@ type Response = {
 	status: number;
 	message: string | object;
 }
-export default async function handler(req: NextApiRequest, res: NextApiResponse<Response>) {
+
+async function handler(req: NextApiRequest, res: NextApiResponse<Response>) {
     try {
         const response: AxiosResponse<{
-            data: Blog[];
+            data: Blogs[];
         }> = await axios.get(`https://v1.nocodeapi.com/bobtehcoder/google_sheets/bcOgqTOxmWjdKXsV?tabId=Blogs&api_key=${ API_KEY }`);
         if (response.status !== 200) {
             res.status(response.status).write(response)
@@ -25,12 +27,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
             message: response.data.data,
         });
         return res.end();
-    } catch (err) {
+    } catch (err: any) {
 		res.status(500).json({
 			status: 500,
 			message: 'INTERNAL_SERVER_ERROR',
 		});
 
-		return;
+        throw new Error(err);
 	}
 }
+
+export default withSentry(handler);
