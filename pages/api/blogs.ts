@@ -27,13 +27,13 @@ async function handler(req: NextApiRequest, res: NextApiResponse<Response>) {
             message: response.data.data,
         });
         return res.end();
-    } catch (err) {
+    } catch (err: any) {
 		res.status(500).json({
 			status: 500,
 			message: 'INTERNAL_SERVER_ERROR',
 		});
 
-		return;
+        throw new Error(err);
 	}
 }
 
