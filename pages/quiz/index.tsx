@@ -2,45 +2,67 @@ import axios from 'axios';
 import React from 'react';
 import PrimaryLayout from '../../components/layouts/PrimaryLayout';
 import { Quiz } from '../../types/Quiz';
+import dayjs from 'dayjs';
+import { ENV } from '../../const';
+import { NextPageContext } from 'next';
+import { decode } from '../../services/markdown';
 
-type Props = {};
+type Props = {
+    questions: Quiz[];
+    date: string;
+};
 type State = {
-    QuizQuestions: Quiz[]
-    QuestionNumber: number
-    TotalQuestions: number,
+    active_question: number;
+    selected_answers: number[] | null[];
 };
 
 class QuizPage extends React.PureComponent<Props, State> {
-    constructor(props:Props){
+    constructor(props: Props) {
         super(props);
+        const answers = [];
+        for (let i = 0; i < props.questions.length; i++) {
+            answers.push(null);
+        }
+
         this.state = {
-            // @ts-ignore
-            QuizQuestions: this.props.message,
-            QuestionNumber: 0,
-            // @ts-ignore
-            TotalQuestions: this.props.message.length-1,
-        };
+            active_question: 0,
+            selected_answers: answers,
+        }
     }
-    NextQuestion = () => {
-        const { QuestionNumber } = this.state;
-        this.setState({
-            QuestionNumber: QuestionNumber + 1
-        })
+
+    navigate(type: 'prev' | 'next'): void {
+        const { active_question } = this.state;
+        this.setState({ active_question: active_question + (type === 'next' ? 1 : -1) });
     }
-    PreviousQuestion = () => {
-        const { QuestionNumber } = this.state;
-        this.setState({
-            QuestionNumber: QuestionNumber - 1
-        })
+
+    set_anwser(question: number, answer: number): void {
+        const { selected_answers } = this.state;
+        selected_answers[question] = answer;
+        this.setState({ selected_answers }, () => this.forceUpdate());
+        return;
     }
-    SubmitAll = () => {
-        window.location.href = '/answers';
+
+    public submit(): void {
+        const { selected_answers } = this.state;
+        const { date, questions } = this.props;
+
+        /** Delaying for a 100% progress completion */
+        this.setState({ active_question: questions.length }, () => {
+            const qa_mapping: { [key: string]: number } = {};
+            for (let i = 0; i < questions.length; i++) {
+                qa_mapping[questions[i]._id] = selected_answers[i] || -1;
+            }
+            
+            const key: string = `${ date }:${ dayjs().unix() }:${ JSON.stringify(qa_mapping) }`;
+            const buffer: string = Buffer.from(key, 'ascii').toString('base64');
+            return window.location.href = `/quiz/results?recover=${ buffer }`;
+        });
     }
-    WidthOfBar = () => {
-        return ((this.state.QuestionNumber + 1)/(this.state.TotalQuestions + 1))*100
-    }
+
     render(): JSX.Element {
-        const { QuestionNumber, QuizQuestions } = this.state;
+        const { questions } = this.props;
+        const { active_question, selected_answers } = this.state;
+
         return (
             <PrimaryLayout>
                 <div className="container mt-4 mb-4">
@@ -56,61 +78,77 @@ class QuizPage extends React.PureComponent<Props, State> {
                         </div>
 
                         <div className="page-body mt-5">
+                            {/* Progressbar */}
                             <div className="progress-container d-flex align-items-center">
                                 <div className="progress flex-grow-1">
-                                    <div className="progress-bar" style={{ width: `${this.WidthOfBar()}%` }} role="progressbar" />
+                                    <div className="progress-bar" style={{ width: `${(100 / questions.length) * active_question}%` }} role="progressbar" />
                                 </div>
                                 <div className="p-2 progress-text">
-                                    {this.state.QuestionNumber+1}/{this.state.TotalQuestions + 1}
+                                    {active_question + ``}/{questions.length}
                                 </div>
                             </div>
 
-                            <div className="question-container">
-                                {
-                                    <div>
-                                        <div className="question-header">
-                                            <h4 className="question">
-                                                {QuestionNumber+1}. {QuizQuestions[QuestionNumber].Question}
-                                            </h4>
-                                        </div>
-                                        <div className="question-body">
-                                            {QuizQuestions[QuestionNumber].Options.map((item, index) => (
-                                                <div className="form-check" key={index}>
-                                                    <input className="form-check-input" type="radio" name="flexRadioDefault" id={`option-${ index }`} />
-                                                    <label className="form-check-label" htmlFor={`option-${ index }`}>
-                                                        {item.Answer}
-                                                    </label>
+                            {
+                                questions.map((question, index) => {
+                                    if (index === active_question) {
+                                        return (
+                                            <div className="question-container" key={question._id}>
+                                                <div className="question-header">
+                                                    <h4 className="question">
+                                                        <span dangerouslySetInnerHTML={{ __html: decode(question.Question) }}></span>
+                                                    </h4>
                                                 </div>
-                                            ))}
-                                            <div className="d-flex justify-content-between col-4">
-                                                {
-                                                    this.state.QuestionNumber > 0 && (
-                                                        <button className="btn btn-primary mt-4 mb-5 px-4" onClick={() => this.PreviousQuestion()}>
-                                                            Previous
-                                                        </button>
-                                                    )
-                                                }
-                                                {
-                                                    this.state.QuestionNumber !== this.state.TotalQuestions && (
-                                                        <button className="btn btn-primary mt-4 mb-5 px-4" onClick={() => this.NextQuestion()}>
-                                                            Next
-                                                        </button>
-                                                    )
-                                                }
-                                                {
-                                                    this.state.QuestionNumber === this.state.TotalQuestions && (
-                                                        <button className="btn btn-primary mt-4 mb-5 px-4" onClick={() => this.SubmitAll()}>
-                                                            Submit
-                                                        </button>
-                                                    )
-                                                }
-                                            </div>  
-                                        </div>
-                                    </div>
+
+                                                <div className="question-body">
+                                                    {
+                                                        question.Options.map((option, o_index) => (
+                                                            <div className="form-check" key={o_index}>
+                                                                <input 
+                                                                    className="form-check-input" 
+                                                                    onChange={() => this.set_anwser(index, o_index)} 
+                                                                    type="radio" 
+                                                                    name="flexRadioDefault" 
+                                                                    id={`question-${index}-option-${o_index}`} 
+                                                                    checked={selected_answers[index] === o_index}
+                                                                />
+                                                                <label className="form-check-label" htmlFor={`question-${index}-option-${o_index}`}>
+                                                                    {option.Answer}
+                                                                </label>
+                                                            </div>
+                                                        ))
+                                                    }
+                                                </div>
+                                            </div>
+                                        )
+                                    }
+
+                                    return <div key={question._id}></div>;
+                                })
+                            }
+
+                            {/* Buttons */}
+                            <div className="d-flex justify-content-between col-4">
+                                <button className="btn btn-outline-primary mt-4 mb-5 px-4" onClick={() => this.navigate('prev')} disabled={active_question === 0}>
+                                    Previous
+                                </button>
+                                {
+                                    active_question < questions.length - 1 && (
+                                        <button className="btn btn-primary mt-4 mb-5 px-4" onClick={() => this.navigate('next')}>
+                                            Next
+                                        </button>
+                                    )
+                                }
+                                {
+                                    active_question === questions.length - 1 && (
+                                        <button className="btn btn-primary mt-4 mb-5 px-4" onClick={() => this.submit()}>
+                                            Submit
+                                        </button>
+                                    )
                                 }
                             </div>
                         </div>
                     </div>
+
                 </div>
             </PrimaryLayout>
         )
@@ -119,9 +157,29 @@ class QuizPage extends React.PureComponent<Props, State> {
 
 export default QuizPage;
 
-export const getStaticProps = async () => {
-    const response = await axios.get('http://localhost:3000/api/quiz')
-    return {
-        props: response.data
+export async function getServerSideProps(context: NextPageContext) {
+    try {
+        const { date } = context.query;
+        const response = await fetch(`${ENV.baseUrl}/mc-qs?Date=${date || dayjs().format('YYYY-MM-DD')}`, {
+            method: 'GET',
+            headers: new Headers({
+                'content-type': 'application/json',
+            }),
+        });
+        const questions = await response.json();
+        return {
+            props: {
+                questions,
+                date: date || dayjs().format('YYYY-MM-DD'),
+            }
+        }
+    } catch (err) {
+        return {
+            props: {
+                questions: [],
+                date: 'null',
+            },
+            notFound: true,
+        }
     }
 }
