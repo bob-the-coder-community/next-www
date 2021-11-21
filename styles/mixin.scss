@@ -15,10 +15,20 @@
   background: none;
   color: $primary;
   border: 2px solid $primary;     
+  &:hover {
+    background: $primary;
+    color: #ffffff; 
+    transition: .5s
+  }
 }
 
 @mixin Share_Button(){
   @include Retry_Button();
   background: $primary;
   color: #ffffff;
+  &:hover {
+    background: #ffffff;
+    color: $primary; 
+    transition: .5s
+  }
 }

@@ -1,10 +1,13 @@
+import axios from 'axios';
 import React from 'react';
 import PrimaryLayout from '../../components/layouts/PrimaryLayout';
+import { Quiz } from '../../types/Quiz';
 
 type Props = {};
 type State = {
     correctAnswer: boolean
     selectedAnswer: boolean
+    answersDetails: Quiz[]
 };
 
 class QuizPage extends React.PureComponent<Props, State> {
@@ -13,8 +16,13 @@ class QuizPage extends React.PureComponent<Props, State> {
         this.state = {
             correctAnswer: true,
             selectedAnswer: true,
+            // @ts-ignore
+            answersDetails: this.props.message
         };
     }
+    RestartQuiz = () =>{
+        window.location.href = '/quiz';
+    } 
     render(): JSX.Element {
         return (
             <PrimaryLayout>
@@ -41,7 +49,7 @@ class QuizPage extends React.PureComponent<Props, State> {
                                         <span className="score_total pt-5">10</span>
                                     </p>    
                                     <div className="d-flex justify-content-around">
-                                        <button className="retry_button">Retry</button>
+                                        <button className="retry_button" onClick={()=> this.RestartQuiz()}>Retry</button>
                                         <button className="share_button">Share</button>
                                     </div>
                                 </div>
@@ -53,35 +61,22 @@ class QuizPage extends React.PureComponent<Props, State> {
                             </div>
                             <div className="pb-5">
                             {
-                                [1,2,3,4,5,6,7,8,9,10].map((_, index)=>(
-                                    <div className="answers-container">
+                                this.state.answersDetails.map((eachQuestions, index)=>(
+                                    <div className="answers-container" key={index}>
                                         <div className="answers-header col-10">
                                             <h4 className="answers">
-                                                {index + 1}. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sit augue eu facilisis convallis non duis imperdiet enim. Enim id orci, ipsum et diam porttitor.
+                                                {index + 1}. {eachQuestions.Question}
                                             </h4>
                                         </div>
                                         <div className="answers-body mb-5">
                                             {
-                                                [1, 2, 3, 4].map((item, index) => (
-                                                    <div className="form-check mb-2" key={item}>
+                                                eachQuestions.Options.map((item, index) => (
+                                                    <div className="form-check mb-2" key={index}>
                                                         <input className="form-check-input" type="radio" name="flexRadioDefault" id={`option-${ index }`} />
                                                         {
-                                                            index + 1 === 1 
-                                                            ? (
-                                                                <label className="form-check-label answer_correct" htmlFor={`option-${ index }`}>
-                                                                    Lorem ipsum dolor sit amet consectetur
-                                                                </label>
-                                                            )
-                                                            : index + 2 === 4 ?
-                                                            (
-                                                                <label className="form-check-label answer_correct answer_selected" htmlFor={`option-${ index }`}>
-                                                                    Lorem ipsum dolor sit amet consectetur
-                                                                </label>
-                                                            ): (
-                                                                <label className="form-check-label" htmlFor={`option-${ index }`}>
-                                                                    Lorem ipsum dolor sit amet consectetur
-                                                                </label>
-                                                            )
+                                                            <label className={`form-check-label ${item.Correct === true && 'answer_correct'}`} htmlFor={`option-${ index }`}>
+                                                                {item.Answer}
+                                                            </label>
                                                         }
                                                     </div>
                                                 ))
@@ -91,7 +86,7 @@ class QuizPage extends React.PureComponent<Props, State> {
                                 ))
                             }
                             <div className="mt-5 mb-5 col-lg-6 col-ml-6 col-sm-12 col-12">
-                                <button className="retry_button">Retry</button>
+                                <button className="retry_button" onClick={()=> this.RestartQuiz()}>Retry</button>
                                 <button className="share_button">Share</button>
                             </div>
                             </div>
@@ -105,3 +100,11 @@ class QuizPage extends React.PureComponent<Props, State> {
 }
 
 export default QuizPage;
+
+export const getStaticProps = async () => {
+    const response = await axios.get('http://localhost:3000/api/quiz')
+    return {
+        // @ts-ignore
+        props: response.data
+    }
+}
