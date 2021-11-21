@@ -30,6 +30,12 @@ class NavbarComponent extends React.PureComponent<{}> {
                                 <Link href="/launch-letter" passHref>
                                     <a className="nav-link just-link mx-3">About</a>
                                 </Link>
+                                <Link href="/quiz" passHref>
+                                    <a className="nav-link just-link mx-3">
+                                        jsQUIZ
+                                        <span className="badge badge-light">NEW!</span>
+                                    </a>
+                                </Link>                                
                                 <Link href="/code-of-conduct" passHref>
                                     <a className="nav-link just-link mx-3">Code of Conduct</a>
                                 </Link>                                
