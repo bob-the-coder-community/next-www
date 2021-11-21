@@ -20,3 +20,24 @@ git clone https://github.com/bob-the-coder-community/next-www.git
 yarn install
 yarn dev
 ```
+
+## Contributors
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top">
+        <a href="https://github.com/iSanjayAchar" target="_blank">
+          <img width="128px" src="https://avatars.githubusercontent.com/u/11937721?v=4" alt="Sanjay Achar" />
+        </a><br />
+        <div>Sanjay Achar</div><br />
+      </td>
+      <td align="center" valign="top">
+        <a href="https://github.com/ankitjswl56" target="_blank">
+          <img width="128px" src="https://avatars.githubusercontent.com/u/42671392?v=4" alt="Ankit Jaiswal" />
+        </a><br />
+        <div>Ankit Jaiswal</div><br />
+      </td>      
+    </tr><tr></tr>
+  </tbody>
+</table>
+<br />
