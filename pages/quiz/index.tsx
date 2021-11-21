@@ -76,13 +76,13 @@ class QuizPage extends React.PureComponent<Props, State> {
 					<meta property="og:url" content="https://bobthecoder.org/quiz" />
 					<meta property="og:title" content="jsQUIZ - bobTheCoder.org" />
 					<meta property="og:description" content="Try our jsQUIZ. This quiz is a nice collection of questions to test your Javascript skills" />
-					<meta property="og:image" content="/images/quiz-thumbanil.jpg" />
+					<meta property="og:image" content="/images/quiz-thumbnail.jpg" />
 
 					<meta property="twitter:card" content="summary_large_image" />
 					<meta property="twitter:url" content="https://bobthecoder.org/quiz" />
 					<meta property="twitter:title" content="jsQUIZ - bobTheCoder.org" />
 					<meta property="twitter:description" content="Try our jsQUIZ. This quiz is a nice collection of questions to test your Javascript skills" />
-					<meta property="twitter:image" content="/images/quiz-thumbanil.jpg" />
+					<meta property="twitter:image" content="/images/quiz-thumbnail.jpg" />
 				</Head>
 
                 <div className="container mt-4 mb-4">
@@ -91,9 +91,9 @@ class QuizPage extends React.PureComponent<Props, State> {
                             <button className="btn btn-outline-light p-0 m-0">
                                 <img src="/images/icons/back-button.svg" alt="Back" className="mt-3 mb-4" />
                             </button>
-                            <h1 className="page-title">Daily Test</h1>
+                            <h1 className="page-title">jsQUIZ</h1>
                             <p className="page-description">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sit augue eu facilisis convallis non duis imperdiet enim.
+                                Try our jsQUIZ. This quiz is a nice collection of questions to test your Javascript skills
                             </p>
                         </div>
 
