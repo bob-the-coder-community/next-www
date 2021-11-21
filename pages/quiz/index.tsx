@@ -6,6 +6,7 @@ import dayjs from 'dayjs';
 import { ENV } from '../../const';
 import { NextPageContext } from 'next';
 import { decode } from '../../services/markdown';
+import Head from 'next/head';
 
 type Props = {
     questions: Quiz[];
@@ -13,7 +14,7 @@ type Props = {
 };
 type State = {
     active_question: number;
-    selected_answers: number[] | null[];
+    selected_answers: number[];
 };
 
 class QuizPage extends React.PureComponent<Props, State> {
@@ -21,7 +22,7 @@ class QuizPage extends React.PureComponent<Props, State> {
         super(props);
         const answers = [];
         for (let i = 0; i < props.questions.length; i++) {
-            answers.push(null);
+            answers.push(-1);
         }
 
         this.state = {
@@ -47,14 +48,15 @@ class QuizPage extends React.PureComponent<Props, State> {
         const { date, questions } = this.props;
 
         /** Delaying for a 100% progress completion */
-        this.setState({ active_question: questions.length }, () => {
+        this.setState({ active_question: (questions.length - 1) }, () => {
             const qa_mapping: { [key: string]: number } = {};
             for (let i = 0; i < questions.length; i++) {
-                qa_mapping[questions[i]._id] = selected_answers[i] || -1;
+                qa_mapping[questions[i]._id] = selected_answers[i];
             }
             
-            const key: string = `${ date }:${ dayjs().unix() }:${ JSON.stringify(qa_mapping) }`;
+            const key: string = `${ date }::${ dayjs().unix() }::${ JSON.stringify(qa_mapping) }`;
             const buffer: string = Buffer.from(key, 'ascii').toString('base64');
+
             return window.location.href = `/quiz/results?recover=${ buffer }`;
         });
     }
@@ -65,6 +67,24 @@ class QuizPage extends React.PureComponent<Props, State> {
 
         return (
             <PrimaryLayout>
+				<Head>
+					<title>jsQUIZ - bobTheCoder.org</title>
+					<meta name="title" content="jsQUIZ - bobTheCoder.org" />
+					<meta name="description" content="Try our jsQUIZ. This quiz is a nice collection of questions to test your Javascript skills" />
+
+					<meta property="og:type" content="website" />
+					<meta property="og:url" content="https://bobthecoder.org/quiz" />
+					<meta property="og:title" content="jsQUIZ - bobTheCoder.org" />
+					<meta property="og:description" content="Try our jsQUIZ. This quiz is a nice collection of questions to test your Javascript skills" />
+					<meta property="og:image" content="/images/quiz-thumbanil.jpg" />
+
+					<meta property="twitter:card" content="summary_large_image" />
+					<meta property="twitter:url" content="https://bobthecoder.org/quiz" />
+					<meta property="twitter:title" content="jsQUIZ - bobTheCoder.org" />
+					<meta property="twitter:description" content="Try our jsQUIZ. This quiz is a nice collection of questions to test your Javascript skills" />
+					<meta property="twitter:image" content="/images/quiz-thumbanil.jpg" />
+				</Head>
+
                 <div className="container mt-4 mb-4">
                     <div className="quiz-landing-page">
                         <div className="page-header">
@@ -81,10 +101,10 @@ class QuizPage extends React.PureComponent<Props, State> {
                             {/* Progressbar */}
                             <div className="progress-container d-flex align-items-center">
                                 <div className="progress flex-grow-1">
-                                    <div className="progress-bar" style={{ width: `${(100 / questions.length) * active_question}%` }} role="progressbar" />
+                                    <div className="progress-bar" style={{ width: `${(100 / questions.length) * active_question + 1}%` }} role="progressbar" />
                                 </div>
                                 <div className="p-2 progress-text">
-                                    {active_question + ``}/{questions.length}
+                                    {active_question + 1 + ``}/{questions.length}
                                 </div>
                             </div>
 
@@ -127,8 +147,8 @@ class QuizPage extends React.PureComponent<Props, State> {
                             }
 
                             {/* Buttons */}
-                            <div className="d-flex justify-content-between col-4">
-                                <button className="btn btn-outline-primary mt-4 mb-5 px-4" onClick={() => this.navigate('prev')} disabled={active_question === 0}>
+                            <div className="d-flex">
+                                <button className="btn btn-outline-primary mt-4 mb-5 px-4" style={{ marginRight: '20px' }} onClick={() => this.navigate('prev')} disabled={active_question === 0}>
                                     Previous
                                 </button>
                                 {
