@@ -1,0 +1,34 @@
+@mixin Space_Grotesk($font_size, $font_color){
+  position: relative;
+  font-family: Space Grotesk;
+  font-weight: bold;
+  font-size: $font_size;
+  line-height: 100%;
+  text-align: center;
+  color: $font_color;
+}
+
+@mixin Retry_Button(){
+  @include Space_Grotesk(18px, $primary);
+  width: 155px;
+  height: 45px;   
+  background: none;
+  color: $primary;
+  border: 2px solid $primary;     
+  &:hover {
+    background: $primary;
+    color: #ffffff; 
+    transition: .5s
+  }
+}
+
+@mixin Share_Button(){
+  @include Retry_Button();
+  background: $primary;
+  color: #ffffff;
+  &:hover {
+    background: #ffffff;
+    color: $primary; 
+    transition: .5s
+  }
+}

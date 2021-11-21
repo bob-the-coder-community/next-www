@@ -1,0 +1,114 @@
+@import '../mixin.scss';
+@import '../variables.scss';
+
+.quiz-landing-page {
+  min-height: 90vh;
+
+  .page-header {
+      margin: 50px 0 30px 0;
+
+      .blurr_top_right{
+        position: relative;
+        width: 920px;
+        height: 379px;
+        left: 860px;
+        top: -111px;
+        background: radial-gradient(50% 50% at 50% 50%, #FADF75 0%, rgba(250, 223, 117, 0) 100%);
+        z-index: -1;
+        margin-bottom: -379px;
+      }
+
+      .page-title {
+          font-size: 2.4rem;
+          font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+          font-weight: 700;
+          color: #000000;
+      }
+
+      .answers_header_box{
+        position: relative;
+        height: 381px;
+        background: #F3F0FC;
+        @media (max-width: 991px){
+          height: 810px
+        }
+        .score_image{
+          position: relative;
+          width: 315px;
+          height: 310.74px;
+        }
+        .image_vector{
+          position: relative;
+          margin-left: -20px;
+          margin-top: 10px;
+          width: 510px;
+          height: 320px;
+        }
+        .image_group{
+          width: 450px;
+          margin-top: -385px;
+        }
+        .box_second_half{
+          @media (max-width: 991px) {
+            position: relative;
+            top: -40px;
+          }
+        }
+        .score{
+          .score_result{
+            @include Space_Grotesk(76px, #24D560);
+          }
+          .score_divide{
+            @include Space_Grotesk(55px, #7B7688);
+          }
+          .score_total{
+            @include Space_Grotesk(27px, #7B7688);
+          }
+        }
+
+        .retry_button{
+          @include Retry_Button();    
+        }
+        .share_button{
+          @include Share_Button();
+        }
+      }
+  }
+  .answers-container {
+    max-width: 800px;
+
+    .answers {
+        font-family: 'Epilogue', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        color: #403E47;
+        font-size: 1rem;
+        line-height: 36px;
+        font-weight: bold;
+    }
+
+    .answers-body {
+        margin: 30px 0;
+
+        .form-check {
+            margin: 15px 0;
+            font-family: 'Epilogue', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            color: #403E47;
+            font-size: 1rem;
+        }
+    }
+  }
+
+  .answer_correct{
+    color: #24D460;
+    font-weight: bold;
+  }
+  .answer_selected{
+    color: $dark;
+  }
+  .retry_button{
+    @include Retry_Button();    
+    margin-right: 40px
+  }
+  .share_button{
+    @include Share_Button();
+  }
+}
