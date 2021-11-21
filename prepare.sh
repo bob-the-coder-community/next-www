@@ -1,3 +1,6 @@
+#!/bin/bash
+set -e
+
 echo "Running lint"
 yarn lint
 
