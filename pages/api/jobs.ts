@@ -3,7 +3,7 @@ import { withSentry } from '@sentry/nextjs';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { ENV } from '../../const';
 import { decode } from '../../services/markdown';
-import chromium from 'chrome-aws-lambda';
+// import chromium from 'chrome-aws-lambda';
 import dayjs from 'dayjs';
 import ejs from 'ejs';
 import fs from 'fs';
@@ -51,21 +51,23 @@ async function handler(req: NextApiRequest, res: NextApiResponse<Response>) {
             submitted: dayjs().format('MMMM DD YYYY, h:mm:ss a'),
         }
 
-        const html = await ejs.renderFile(`${process.env.PWD}/others/email_templates/job-application.ejs`, formData);
-        const browser = await chromium.puppeteer.launch({ 
-            headless: true,
-            args: ['--no-sandbox', '--disable-setuid-sandbox'],
-            executablePath: await chromium.executablePath
-        });
-        const page = await browser.newPage();
         const fileName = `/tmp/report-${ Math.random() }.pdf`;
-        await page.setContent(html);
+        const html = await ejs.renderFile(`${process.env.PWD}/others/email_templates/job-application.ejs`, formData);
+        // const browser = await chromium.puppeteer.launch({ 
+        //     headless: chromium.headless,
+        //     args: chromium.args,
+        //     executablePath: await chromium.executablePath,
+        //     ignoreHTTPSErrors: true,
+        //     defaultViewport: chromium.defaultViewport,
+        // });
+        // const page = await browser.newPage();
+        // await page.setContent(html);
 
-        await page.pdf({
-            path: fileName,
-            format: 'a4',
-            printBackground: true,
-        });
+        // await page.pdf({
+        //     path: fileName,
+        //     format: 'a4',
+        //     printBackground: true,
+        // });
 
         await send({
             from: `${ full_name } <${ slug }>@e.bobthecoder.org`,
@@ -75,9 +77,9 @@ async function handler(req: NextApiRequest, res: NextApiResponse<Response>) {
             html: `<p>${ full_name } has applied for the job: ${ data[0].Title }</p>`,
             attachments: [
                 {
-                    content: fs.readFileSync(fileName).toString('base64'),
+                    content: fs.readFileSync(html).toString('base64'),
                     filename: (fileName).split('/').pop() || 'report',
-                    type: 'application/pdf',
+                    type: 'text/html',
                     disposition: 'attachment',
                 },
                 {
