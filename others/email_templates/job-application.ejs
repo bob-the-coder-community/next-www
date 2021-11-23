@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Assessment Complete</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Epilogue&family=Space+Grotesk:wght@400;500;700&display=swap');
+
+        html,
+        body {
+            padding: 0;
+            margin: 0;
+            font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            zoom: .8;
+        }
+
+        .header {
+            background-color: #000;
+            text-align: center;
+            color: #fff;
+            padding: 16px;
+            font-size: 18px;
+        }
+
+        .main-information {
+            margin: 16px;
+            background-color: #FADF75;
+            border-radius: 5px;
+            padding: 16px;
+        }
+
+        .key {
+            font-weight: bold;
+            padding: 10px 0;
+        }
+
+        .value {
+            font-family: 'Epilogue', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        .info-row {
+            margin-bottom: 25px;
+        }
+
+        .questions {
+            margin: 16px;
+            margin-top: 50px;
+        }
+
+        .question-item {
+            margin-bottom: 50px;
+        }
+
+        .question {
+            padding: 10px;
+            background-color: #F0CA86;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        .question p {
+            margin: 0;
+        }
+
+        .option {
+            margin-bottom: 10px;
+            padding-left: 10px;
+            border-left: 5px solid transparent;
+        }
+
+        .selected {
+            border-left: 5px solid #24D460;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        bobForCompany - Assessment Report
+    </div>
+
+    <div class="main-information">
+        <table>
+            <thead>
+                <tr>
+                    <td width="150px"></td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="info-row">
+                    <td class="key">Full name:</td>
+                    <td class="value">
+                        <%= full_name %>
+                    </td>
+                </tr>
+                <tr class="info-row">
+                    <td class="key">Email address:</td>
+                    <td class="value">
+                        <%= email %>
+                    </td>
+                </tr>
+                <tr class="info-row">
+                    <td class="key">Phone Number:</td>
+                    <td class="value">
+                        +91 <%= phone %>
+                    </td>
+                </tr>
+                <tr class="info-row">
+                    <td class="key">Company:</td>
+                    <td class="value">
+                        <%= company %>
+                    </td>
+                </tr>
+                <tr class="info-row">
+                    <td class="key">Job:</td>
+                    <td class="value">
+                        <a href="<%= jobLink %>" target="_blank">
+                            <%= jobTitle %>
+                        </a>
+                    </td>
+                </tr>
+                <tr class="info-row">
+                    <td class="key">Submitted:</td>
+                    <td class="value">
+                        <%= submitted %>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="questions">
+        <h4>Report</h4>
+
+        <% questions.forEach(function(question, index) { %>
+            <div class="question-item">
+                <div class="question">
+                    <%- question.question %>
+                </div>
+                <div class="options">
+                    <% question.options.forEach(function(option, index) { %>
+                        <div class="option <%= option.label %>">
+                            <%- option.value %>
+                        </div>
+                        <% }); %>
+                </div>
+            </div>
+            <% }); %>
+    </div>
+</body>
+
+</html>
