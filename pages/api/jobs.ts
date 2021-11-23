@@ -51,7 +51,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse<Response>) {
             submitted: dayjs().format('MMMM DD YYYY, h:mm:ss a'),
         }
 
-        const fileName = `/tmp/report-${ Math.random() }.pdf`;
+        // const fileName = `/tmp/report-${ Math.random() }.pdf`;
         const html = await ejs.renderFile(`${process.env.PWD}/others/email_templates/job-application.ejs`, formData);
         // const browser = await chromium.puppeteer.launch({ 
         //     headless: chromium.headless,
@@ -77,8 +77,8 @@ async function handler(req: NextApiRequest, res: NextApiResponse<Response>) {
             html: `<p>${ full_name } has applied for the job: ${ data[0].Title }</p>`,
             attachments: [
                 {
-                    content: fs.readFileSync(html).toString('base64'),
-                    filename: (fileName).split('/').pop() || 'report',
+                    content: Buffer.from(html).toString('base64'),
+                    filename: 'report.html',
                     type: 'text/html',
                     disposition: 'attachment',
                 },
