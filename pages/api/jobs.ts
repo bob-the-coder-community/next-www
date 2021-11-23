@@ -3,8 +3,7 @@ import { withSentry } from '@sentry/nextjs';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { ENV } from '../../const';
 import { decode } from '../../services/markdown';
-// import puppeteer from 'puppeteer';
-import htmlToPdf from 'html-pdf';
+import chromium from 'chrome-aws-lambda';
 import dayjs from 'dayjs';
 import ejs from 'ejs';
 import fs from 'fs';
@@ -52,57 +51,50 @@ async function handler(req: NextApiRequest, res: NextApiResponse<Response>) {
             submitted: dayjs().format('MMMM DD YYYY, h:mm:ss a'),
         }
 
-        const fileName = `/tmp/report-${ Math.random() }.pdf`;
         const html = await ejs.renderFile(`${process.env.PWD}/others/email_templates/job-application.ejs`, formData);
-        // const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
-        // const page = await browser.newPage();
-        // await page.setContent(html);
-
-        // await page.pdf({
-        //     path: fileName,
-        //     format: 'a4',
-        //     printBackground: true,
-        // });
-
-        return htmlToPdf.create(html, {
-            format: 'A4',
-            type: 'pdf',
-            zoomFactor: '0.7',
-        }).toFile(fileName, async (err: any) => {
-            if (err) {
-                console.log(err);
-                throw new Error(err);
-            }
-
-            await send({
-                from: `${ full_name } <${ slug }>@e.bobthecoder.org`,
-                to: (process.env.ADMIN_EMAILS || '').split(','),
-                subject: `APPLICATION: ${ full_name } - ${ data[0].Title }`,
-                text: `<p>${ full_name } has applied for the job: ${ data[0].Title }</p>`,
-                html: `<p>${ full_name } has applied for the job: ${ data[0].Title }</p>`,
-                attachments: [
-                    {
-                        content: fs.readFileSync(fileName).toString('base64'),
-                        filename: (fileName).split('/').pop() || 'report',
-                        type: 'application/pdf',
-                        disposition: 'attachment',
-                    },
-                    {
-                        content: `${ resume.replace(/"/gi, '').replace('data:application/pdf;base64,', '') }`,
-                        filename: `${ full_name }-${ dayjs().format('DD MMM YYYY') }-CV.pdf`,
-                        type: 'application/pdf',
-                        disposition: 'attachment',
-                    }
-                ],
-            });
-    
-            res.status(200).json({
-                status: 200,
-                message: 'SUCCESS',
-            });
-    
-            return;
+        const browser = await chromium.puppeteer.launch({ 
+            headless: true,
+            args: ['--no-sandbox', '--disable-setuid-sandbox'],
+            executablePath: await chromium.executablePath
         });
+        const page = await browser.newPage();
+        const fileName = `/tmp/report-${ Math.random() }.pdf`;
+        await page.setContent(html);
+
+        await page.pdf({
+            path: fileName,
+            format: 'a4',
+            printBackground: true,
+        });
+
+        await send({
+            from: `${ full_name } <${ slug }>@e.bobthecoder.org`,
+            to: (process.env.ADMIN_EMAILS || '').split(','),
+            subject: `APPLICATION: ${ full_name } - ${ data[0].Title }`,
+            text: `<p>${ full_name } has applied for the job: ${ data[0].Title }</p>`,
+            html: `<p>${ full_name } has applied for the job: ${ data[0].Title }</p>`,
+            attachments: [
+                {
+                    content: fs.readFileSync(fileName).toString('base64'),
+                    filename: (fileName).split('/').pop() || 'report',
+                    type: 'application/pdf',
+                    disposition: 'attachment',
+                },
+                {
+                    content: `${ resume.replace(/"/gi, '').replace('data:application/pdf;base64,', '') }`,
+                    filename: `${ full_name }-${ dayjs().format('DD MMM YYYY') }-CV.pdf`,
+                    type: 'application/pdf',
+                    disposition: 'attachment',
+                }
+            ],
+        });
+
+        res.status(200).json({
+            status: 200,
+            message: 'SUCCESS',
+        });
+
+        return;
     } catch (err) {
         console.error(err);
 		res.status(500).json({
