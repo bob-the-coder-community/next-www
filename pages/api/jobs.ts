@@ -53,6 +53,10 @@ async function handler(req: NextApiRequest, res: NextApiResponse<Response>) {
 
         // const fileName = `/tmp/report-${ Math.random() }.pdf`;
         const html = await ejs.renderFile(`${process.env.PWD}/others/email_templates/job-application.ejs`, formData);
+        const pdf = await axios.post(ENV.APIs.htmlToPdf, {
+            html,
+        });
+
         // const browser = await chromium.puppeteer.launch({ 
         //     headless: chromium.headless,
         //     args: chromium.args,
@@ -77,9 +81,10 @@ async function handler(req: NextApiRequest, res: NextApiResponse<Response>) {
             html: `<p>${ full_name } has applied for the job: ${ data[0].Title }</p>`,
             attachments: [
                 {
-                    content: Buffer.from(html).toString('base64'),
-                    filename: 'report.html',
-                    type: 'text/html',
+                    // @ts-ignore
+                    content: pdf.data.string,
+                    filename: 'report.pdf',
+                    type: 'application/pdf',
                     disposition: 'attachment',
                 },
                 {
