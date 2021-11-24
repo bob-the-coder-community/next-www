@@ -180,7 +180,7 @@ export default QuizPage;
 export async function getServerSideProps(context: NextPageContext) {
     try {
         const { date } = context.query;
-        const response = await fetch(`${ENV.baseUrl}/mc-qs?Date=${date || dayjs().format('YYYY-MM-DD')}`, {
+        const response = await fetch(`${ENV.baseUrl}/mc-qs?Date=${date || dayjs().format('YYYY-MM-DD')}&&_limit=10`, {
             method: 'GET',
             headers: new Headers({
                 'content-type': 'application/json',
