@@ -3,9 +3,12 @@ import Head from 'next/head';
 import FooterComponent from '../shared/Footer';
 import NavbarComponent from '../shared/Navbar';
 
-class PrimaryLayout extends React.PureComponent<{}> {
+type Props = {
+    hideFooter?: boolean;
+};
+class PrimaryLayout extends React.PureComponent<Props> {
     render(): JSX.Element {
-        const { children } = this.props;
+        const { children, hideFooter } = this.props;
 
         return (
             <>
@@ -32,7 +35,11 @@ class PrimaryLayout extends React.PureComponent<{}> {
                 <main>
                     {children}
                 </main>
-                <FooterComponent />
+                {
+                    !hideFooter && (
+                        <FooterComponent />
+                    )
+                }
             </>
         )
     }
