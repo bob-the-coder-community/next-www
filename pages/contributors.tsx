@@ -22,70 +22,53 @@ class ContributorsPage extends React.PureComponent<Props, State> {
         founders: [
             {
                 url: "/../public/images/people/sanjay-achar.png",
-                title: "Lorem ipsum dolor sit amet.",
+                title: "Sanjay Achar",
                 description: "Lorem ipsum dolor sit amet.",
             },
             {
                 url: "/../public/images/people/sanjay-achar.png",
-                title: "Lorem ipsum dolor sit amet.",
+                title: "Pragathi Muthanna",
                 description: "Lorem ipsum dolor sit amet.",
             },
             {
                 url: "/../public/images/people/sanjay-achar.png",
-                title: "Lorem ipsum dolor sit amet.",
+                title: "Rachana K",
                 description: "Lorem ipsum dolor sit amet.",
             },
             {
                 url: "/../public/images/people/sanjay-achar.png",
-                title: "Lorem ipsum dolor sit amet.",
-                description: "Lorem ipsum dolor sit amet.",
-            },
-            {
-                url: "/../public/images/people/sanjay-achar.png",
-                title: "Lorem ipsum dolor sit amet.",
+                title: "Varun Om R",
                 description: "Lorem ipsum dolor sit amet.",
             },
         ],
         contributors: [
             {
                 url: "/../public/images/people/sanjay-achar.png",
-                title: "Lorem ipsum dolor sit amet.",
+                title: "Zuyufulla Manna",
             },
             {
                 url: "/../public/images/people/sanjay-achar.png",
-                title: "Lorem ipsum dolor sit amet.",
+                title: "Ankit Jaiswal",
             },
             {
                 url: "/../public/images/people/sanjay-achar.png",
-                title: "Lorem ipsum dolor sit amet.",
+                title: "Sanjana D",
             },
             {
                 url: "/../public/images/people/sanjay-achar.png",
-                title: "Lorem ipsum dolor sit amet.",
+                title: "Rohit Gorai",
             },
             {
                 url: "/../public/images/people/sanjay-achar.png",
-                title: "Lorem ipsum dolor sit amet.",
+                title: "Shamanth V Kumar",
             },
             {
                 url: "/../public/images/people/sanjay-achar.png",
-                title: "Lorem ipsum dolor sit amet.",
+                title: "Saran Kumar",
             },
             {
                 url: "/../public/images/people/sanjay-achar.png",
-                title: "Lorem ipsum dolor sit amet.",
-            },
-            {
-                url: "/../public/images/people/sanjay-achar.png",
-                title: "Lorem ipsum dolor sit amet.",
-            },
-            {
-                url: "/../public/images/people/sanjay-achar.png",
-                title: "Lorem ipsum dolor sit amet.",
-            },
-            {
-                url: "/../public/images/people/sanjay-achar.png",
-                title: "Lorem ipsum dolor sit amet.",
+                title: "Monish M K",
             },
         ]
     }
@@ -100,12 +83,12 @@ class ContributorsPage extends React.PureComponent<Props, State> {
                     <div className="blob3"></div>
                     
                     <div className="container">
-                        <h1 className="title">Founders</h1>
-                        <div className="foundersContainer">
+                        <h1 className="title display-1">Founders</h1>
+                        <div className="foundersContainer row justify-content-xs-center">
                             {
                                 founders.map( (founder, index): JSX.Element => {
                                     return (
-                                        <div className="founderCard" key={index}>
+                                        <div className="founderCard col-sm-6 col-lg-4" key={index}>
                                             <Image src={founder.url} alt="founderImage" width="400" height="400"/>
                                             <div className="founderTitle">{founder.title}</div>
                                             <div className="founderDesc">{founder.description}</div>
@@ -116,14 +99,14 @@ class ContributorsPage extends React.PureComponent<Props, State> {
                         </div>
                     </div>
                     <div className="container">
-                        <h1 className="title">Contributors</h1>
-                        <div className="contributorsContainer">
+                        <h1 className="title display-1">Contributors</h1>
+                        <div className="contributorsContainer row justify-content-xs-center">
                             {
                                 contributors.map( (contributor, index): JSX.Element => {
                                     return (
-                                        <div className="contributorCard" key={index}>
+                                        <div className="contributorCard col-xs-12 col-sm-6 col-md-4 col-lg-3" key={index}>
                                             <Image src={contributor.url} alt="contributorImage" width="300" height="300"/>
-                                            <div className="contributorTitle">{contributor.title}</div>
+                                            <h6 className="contributorTitle">{contributor.title}</h6>
                                         </div>
                                     )
                                 })
