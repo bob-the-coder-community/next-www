@@ -2,120 +2,63 @@
     min-height: 90vh;
     margin: 50px 0;
 
-    .blob1 {
-        position: absolute;
-        width: 1678.14px;
-        height: 315.38px;
-        left: -107.28px;
-        top: -75px;
-        
-        background: radial-gradient(42.01% 42.29% at 50% 50%, #FADF75 0%, rgba(250, 223, 117, 0) 100%);
-        transform: rotate(-0.83deg);
-        z-index: -1;
-    }
+	.radial-gradient {
+		height: 300px;
+		width: 100%;
+		background: radial-gradient(42.27% 42.27% at 50% 51.21%, #FADF75 0%, rgba(250, 223, 117, 0) 100%);
+		margin-top: -150px;
+	}
 
-    .blob2 {
-        position: absolute;
-        width: 314.62px;
-        height: 372px;
-        left: -130.62px;
-        top: 629px;
-        
-        background: radial-gradient(50% 50% at 50% 50%, rgba(255, 109, 69, 0.63) 0%, rgba(255, 109, 69, 0) 100%);
-    }
+    .core-members {
+        margin-top: -100px;
 
-    .blob3 {
-        position: absolute;
-        width: 698.15px;
-        height: 352.49px;
-        left: calc(100vw - 350px);
-        top: 1400px;
-        
-        background: radial-gradient(50% 50% at 50% 50%, rgba(36, 213, 96, 0.24) 8.38%, rgba(117, 250, 206, 0) 100%);
-    }
+        &.other-contributors {
+            margin-top: 50px;
+            margin-bottom: 100px;
 
-    .container {
+            .title {
+                margin-bottom: 15px;
+            }
 
-        .title {
-            margin-top: 140px;
-            text-align: left;
-
-            /* Heading/H1 */
-            font-family: Space Grotesk;
-            font-style: normal;
-            font-weight: bold;
-
-            /* identical to box height, or 96px */
-            letter-spacing: -0.03em;
-
-            /* Neutral/1 */
-            color: #22211E;
+            .founder-image {
+                height: 140px;
+                margin-top: 10px;
+            }
         }
 
-        .foundersContainer {
-            margin-top: 55px;
+        .title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            color: #22211E;
+            margin-bottom: 30px;
+        }
 
-            .founderCard {
+        .person-card {
+            text-align: center;
+            margin-bottom: 20px;
 
-                .founderTitle {
-                    font-family: Space Grotesk;
-                    font-style: normal;
-                    font-weight: bold;
-                    font-size: 28px;
-                    line-height: 130%;
-                    
-                    /* or 36px */
-                    
-                    color: #000000;
-                    
-                    
-                    /* Inside Auto Layout */
-                    flex: none;
-                    order: 1;
-                    flex-grow: 0;
-                    margin: 16px 0px;
-                }
-
-                .founderDesc {
-                    font-family: Epilogue;
-                    font-style: normal;
-                    font-weight: 500;
-                    font-size: 24px;
-                    line-height: 150%;
-                    
-                    /* identical to box height, or 36px */
-                    
-                    color: #000000;
-                    
-                    
-                    /* Inside Auto Layout */
-                    flex: none;
-                    order: 2;
-                    flex-grow: 0;
-                    margin: 16px 0px;
-                }
+            img {
+                width: 100%;
+                height: 250px;
+                object-fit: cover;
+                margin-bottom: 20px;
+                border-radius: 4px;
             }
-        }   
-        
-        .contributorsContainer {
-            margin-top: 40px;
-            margin-bottom: 180px;
 
-            .contributorCard {
-                margin-top: 15px;
+            h4 {
+                margin-bottom: 5px;
+                font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                font-weight: bold;
+                font-size: 1.2rem;
+                color: #000;
+            }
 
-                .contributorTitle {
-                    /* Heading/H6 */
-                    font-family: Space Grotesk;
-                    font-style: normal;
-                    font-weight: bold;
-                    font-size: 22px;
-                    line-height: 130%;
-
-                    /* identical to box height, or 29px */
-
-                    color: #000000;
-                }
+            small {
+                font-family: 'Epilogue', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                font-size: .9rem;
+                color: #000;
+                opacity: .7;
             }
         }
     }

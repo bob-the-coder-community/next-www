@@ -111,6 +111,9 @@ class FooterComponent extends React.PureComponent<Props, State> {
                                                 <a href={ENV.JoinLink} target="_blank">Join</a>
                                             </li>
                                             <li>
+                                                <a href="/contributors">Contributors</a>
+                                            </li>                                            
+                                            <li>
                                                 <a href="/code-of-conduct">Code of Conduct</a>
                                             </li>
                                             <li>

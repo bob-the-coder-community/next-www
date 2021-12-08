@@ -1,117 +1,128 @@
 import React from 'react';
 import PrimaryLayout from '../components/layouts/PrimaryLayout';
-import Image from 'next/image';
+import Head from 'next/head';
 
-type Props = {};
-type Founder = {
-    url: string,
-    title: string,
-    description: string
-}
-type Contributor = {
-    url: string,
-    title: string
-}
-type State = {
-    founders: Founder[],
-    contributors: Contributor[]
+const Members: {
+    founders: {
+        title: string;
+        description: string;
+        url: string;
+    }[];
+    others: {
+        title: string;
+        url: string;
+    }[];
+} = {
+    founders: [
+        {
+            url: "/images/people/sanjay-achar.png",
+            title: "Sanjay Achar",
+            description: "Founder",
+        },
+        {
+            url: "/images/people/pragathi-muthanna.png",
+            title: "Pragathi Muthanna",
+            description: "Founding Partner - Community",
+        },
+        {
+            url: "/images/people/sanjay-achar.png",
+            title: "Rachana KN",
+            description: "Business Development",
+        },
+        {
+            url: "/images/people/pragathi-muthanna.png",
+            title: "Varun Om R",
+            description: "Community Manager",
+        },        
+    ],
+    others: [
+        {
+            url: "/images/people/sanjay-achar.png",
+            title: "Zuyufulla Manna",
+        },
+        {
+            url: "/images/people/sanjay-achar.png",
+            title: "Ankit Jaiswal",
+        },
+        {
+            url: "/images/people/sanjay-achar.png",
+            title: "Sanjana D",
+        },
+        {
+            url: "/images/people/sanjay-achar.png",
+            title: "Rohit Gorai",
+        },
+        {
+            url: "/images/people/sanjay-achar.png",
+            title: "Shamanth V Kumar",
+        },
+        {
+            url: "/images/people/sanjay-achar.png",
+            title: "Saran Kumar",
+        },
+        {
+            url: "/images/people/sanjay-achar.png",
+            title: "Monish M K",
+        },        
+    ]
 };
 
-class ContributorsPage extends React.PureComponent<Props, State> {
-    state: Readonly<State> = {
-        founders: [
-            {
-                url: "/../public/images/people/sanjay-achar.png",
-                title: "Sanjay Achar",
-                description: "Lorem ipsum dolor sit amet.",
-            },
-            {
-                url: "/../public/images/people/sanjay-achar.png",
-                title: "Pragathi Muthanna",
-                description: "Lorem ipsum dolor sit amet.",
-            },
-            {
-                url: "/../public/images/people/sanjay-achar.png",
-                title: "Rachana K",
-                description: "Lorem ipsum dolor sit amet.",
-            },
-            {
-                url: "/../public/images/people/sanjay-achar.png",
-                title: "Varun Om R",
-                description: "Lorem ipsum dolor sit amet.",
-            },
-        ],
-        contributors: [
-            {
-                url: "/../public/images/people/sanjay-achar.png",
-                title: "Zuyufulla Manna",
-            },
-            {
-                url: "/../public/images/people/sanjay-achar.png",
-                title: "Ankit Jaiswal",
-            },
-            {
-                url: "/../public/images/people/sanjay-achar.png",
-                title: "Sanjana D",
-            },
-            {
-                url: "/../public/images/people/sanjay-achar.png",
-                title: "Rohit Gorai",
-            },
-            {
-                url: "/../public/images/people/sanjay-achar.png",
-                title: "Shamanth V Kumar",
-            },
-            {
-                url: "/../public/images/people/sanjay-achar.png",
-                title: "Saran Kumar",
-            },
-            {
-                url: "/../public/images/people/sanjay-achar.png",
-                title: "Monish M K",
-            },
-        ]
-    }
+type Props = {};
+type State = {};
 
+class ContributorsPage extends React.PureComponent<Props, State> {
     render(): JSX.Element {
-        const {founders, contributors} = this.state
+        const { founders, others } = Members;
         return (
             <PrimaryLayout>
+				<Head>
+					<title>Contributors - bobTheCoder.org</title>
+					<meta name="title" content="Contributors - bobTheCoder.org" />
+					<meta name="description" content="Look who is contributing to bobTheCoder.org" />
+
+					<meta property="og:type" content="website" />
+					<meta property="og:url" content="https://bobthecoder.org/contributors" />
+					<meta property="og:title" content="Contributors - bobTheCoder.org" />
+					<meta property="og:description" content="Look who is contributing to bobTheCoder.org" />
+
+					<meta property="twitter:card" content="summary_large_image" />
+					<meta property="twitter:url" content="https://bobthecoder.org/contributors" />
+					<meta property="twitter:title" content="Contributors - bobTheCoder.org" />
+					<meta property="twitter:description" content="Look who is contributing to bobTheCoder.org" />
+				</Head>
+
                 <div className="contributors">
-                    <div className="blob1"></div>
-                    <div className="blob2"></div>
-                    <div className="blob3"></div>
-                    
                     <div className="container">
-                        <h1 className="title display-1">Founders</h1>
-                        <div className="foundersContainer row justify-content-xs-center">
-                            {
-                                founders.map( (founder, index): JSX.Element => {
-                                    return (
-                                        <div className="founderCard col-sm-6 col-lg-4" key={index}>
-                                            <Image src={founder.url} alt="founderImage" width="400" height="400"/>
-                                            <div className="founderTitle">{founder.title}</div>
-                                            <div className="founderDesc">{founder.description}</div>
+                        <div className="radial-gradient" />
+
+                        <div className="core-members">
+                            <h1 className="title">Founding members</h1>
+                            <div className="row">
+                                {
+                                    founders.map((person, index) => (
+                                        <div className="col-lg-3 col-md-4 col-sm-6 col-12 person-card" key={index}>
+                                            <img src={person.url} alt={person.title} className="founder-image" />
+                                            <h4 className="founder-name">{person.title}</h4>
+                                            <small className="text-muted">{person.description}</small>
                                         </div>
-                                    )
-                                })
-                            }
+                                    ))
+                                }
+                            </div>
                         </div>
-                    </div>
-                    <div className="container">
-                        <h1 className="title display-1">Contributors</h1>
-                        <div className="contributorsContainer row justify-content-xs-center">
-                            {
-                                contributors.map( (contributor, index): JSX.Element => {
-                                    return (
-                                        <div className="contributorCard col-xs-12 col-sm-6 col-md-4 col-lg-3" key={index}>
-                                            <Image src={contributor.url} alt="contributorImage" width="300" height="300"/>
-                                            <h6 className="contributorTitle">{contributor.title}</h6>
+
+                        <div className="core-members other-contributors">
+                            <h1 className="title">Contributors</h1>
+                            <div className="row">
+                                {
+                                    others.map((person, index) => (
+                                        <div className="col-lg-2 col-md-3 col-sm-4 col-6 person-card" key={index}>
+                                            <img src={person.url} alt={person.title} className="founder-image" />
+                                            <h4 className="founder-name">{person.title}</h4>
                                         </div>
-                                    )
-                                })
-                            }
-                        </div>
+                                    ))
+                                }
+                            </div>
+                        </div>                        
                     </div>
                 </div>
             </PrimaryLayout>
