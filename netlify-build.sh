@@ -7,7 +7,7 @@ rm -rf firebase
 
 # Building sitemap
 echo "Building sitemap.xml"
-node ./sitemap.xml
+node ./sitemap
 
 # Running build command
 yarn build
