@@ -48,7 +48,11 @@ class AccountLayout extends React.PureComponent<Props, State> {
                                 </div>
                             </div>
                             <div className="child-container">
-                                {children}
+                                <div className="box" />
+                                <div className="box-2" />
+                                <div className="child-content">
+                                    {children}
+                                </div>
                             </div>
                         </div>
                     </div>
