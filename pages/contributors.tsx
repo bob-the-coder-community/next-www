@@ -15,43 +15,43 @@ const Members: {
 } = {
     founders: [
         {
-            url: "/images/people/sanjay-achar.jpg",
+            url: "/images/people/sanjay-achar.png",
             title: "Sanjay Achar",
             description: "Founder",
         },
         {
-            url: "/images/people/pragathi-muthanna.jpg",
+            url: "/images/people/pragathi-muthanna.png",
             title: "Pragathi Muthanna",
             description: "Founding Partner",
         },      
     ],
     others: [
         {
-            url: "/images/people/rachana-kn.jpg",
+            url: "/images/people/rachana-kn.png",
             title: "Rachana KN",
         },
         {
-            url: "/images/people/om-varun-r.jpg",
+            url: "/images/people/om-varun-r.png",
             title: "Varun Om R",
         },          
         {
-            url: "/images/people/zuyufulla-manna.jpg",
+            url: "/images/people/zuyufulla-manna.png",
             title: "Zuyufulla Manna",
         },
         {
-            url: "/images/people/ankit-jaiswal.jpg",
+            url: "/images/people/ankit-jaiswal.png",
             title: "Ankit Jaiswal",
         },
         {
-            url: "/images/people/sanjana-d.jpg",
+            url: "/images/people/sanjana-d.png",
             title: "Sanjana D",
         },
         {
-            url: "/images/people/rohit-gorai.jpg",
+            url: "/images/people/rohit-gorai.png",
             title: "Rohit Gorai",
         },
         {
-            url: "/images/people/shamanth-kumar.jpg",
+            url: "/images/people/shamanth-kumar.png",
             title: "Shamanth V Kumar",
         },
         {
