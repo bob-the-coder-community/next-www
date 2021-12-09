@@ -1,7 +1,7 @@
 @import "./variables";
 @import "../node_modules/bootstrap/scss/bootstrap";
 @import "../node_modules/highlight.js/styles/default.css";
-@import url('https://fonts.googleapis.com/css2?family=Epilogue&family=Space+Grotesk:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Epilogue&family=Space+Grotesk:wght@400;500;700;900&display=swap');
 
 html, body {
 	padding: 0;
@@ -57,6 +57,7 @@ html, body {
 @import "./pages//answers";
 @import "./pages/job-description";
 @import "./pages/contributors";
+@import "./pages/account";
 
 /** Components */
 @import "./footer";

@@ -1,0 +1,90 @@
+.account-layout {
+    margin: 50px 0 100px 0;
+
+    .container {
+        background-image: url('/images/account-bg.svg');
+        background-size: contain;
+        min-height: 400px;
+        background-repeat: no-repeat;
+        padding: 40px;
+    }
+
+    .account-container {
+        width: 100%;
+        height: 100%;        
+        background-color: #fff;
+        box-shadow: 0px 0px 30px rgba(245, 81, 29, 0.15);
+        border-radius: 10px;    
+        min-height: 60vh;
+
+        .side-panel {
+            min-width: 400px;
+            max-width: 500px;
+            background-color: #FF6D45;
+            border-radius: 10px 0 0 10px;
+            padding: 50px 30px;
+            color: #fff;
+
+            .top-content {
+                h1 {
+                    font-size: 50px;
+                    font-weight: 900;
+                    font-family: 'Epilogue', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                    margin-bottom: 20px;
+                }
+
+                p {
+                    margin-top: 30px;
+                    font-family: 'Epilogue', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                    font-weight: 500;                   
+                }
+
+                ul {
+                    padding: 0;
+                }
+
+                li {
+                    list-style: none;
+                    font-size: 18px;
+                    margin-bottom: 10px;
+
+                    &:before {
+                        content: url("data:image/svg+xml,%0A%3Csvg width='16' height='14' viewBox='0 0 16 14' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11.4999 11.4998C9.01468 13.9851 4.98532 13.9851 2.50009 11.4998C0.0148594 9.01462 0.014859 4.98526 2.50009 2.50003C4.98532 0.0147973 9.01468 0.0147963 11.4999 2.50003L15.9998 6.99994L11.4999 11.4998Z' fill='white'/%3E%3C/svg%3E%0A");
+                        width: 20px!important;
+                        height: 20px!important;
+                        vertical-align: middle;
+                        margin-right: 10px;
+                    }
+                }                 
+            }
+
+            .bottom-content {
+                p {
+                    margin-top: 100px;
+                    font-family: 'Epilogue', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                    font-weight: 500;      
+                    margin-bottom: 0;
+                }
+                
+                ul {
+                    padding: 0;
+                }
+
+                li {
+                    list-style: none;
+                    display: inline;
+                    margin-right: -20px;
+
+                    img {
+                        width: 50px;
+                        height: 50px;
+                        border-radius: 50%;
+                        object-fit: cover;
+                        border: 5px solid #FF6D45;
+                    }
+                }
+            }
+        }
+    }
+}
+
