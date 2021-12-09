@@ -51,12 +51,12 @@ class LaunchLetter extends React.PureComponent<Props> {
                         </p>
                         <div className="d-flex">
                             <div className="person">
-                                <img src="/images/people/sanjay-achar.png" alt="Sanjay Achar" className="picture" />
+                                <img src="/images/people/sanjay-achar.jpg" alt="Sanjay Achar" className="picture" />
                                 <h1>Sanjay Achar</h1>
                                 <p>Founder</p>
                             </div>
                             <div className="person">
-                                <img src="/images/people/pragathi-muthanna.png" alt="Pragathi Muthanna" className="picture" />
+                                <img src="/images/people/pragathi-muthanna.jpg" alt="Pragathi Muthanna" className="picture" />
                                 <h1>Pragathi Muthanna</h1>
                                 <p>Community Manager</p>
                             </div>                            

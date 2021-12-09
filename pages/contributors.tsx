@@ -15,53 +15,51 @@ const Members: {
 } = {
     founders: [
         {
-            url: "/images/people/sanjay-achar.png",
+            url: "/images/people/sanjay-achar.jpg",
             title: "Sanjay Achar",
             description: "Founder",
         },
         {
-            url: "/images/people/pragathi-muthanna.png",
+            url: "/images/people/pragathi-muthanna.jpg",
             title: "Pragathi Muthanna",
-            description: "Founding Partner - Community",
-        },
-        {
-            url: "/images/people/sanjay-achar.png",
-            title: "Rachana KN",
-            description: "Business Development",
-        },
-        {
-            url: "/images/people/pragathi-muthanna.png",
-            title: "Varun Om R",
-            description: "Community Manager",
-        },        
+            description: "Founding Partner",
+        },      
     ],
     others: [
         {
-            url: "/images/people/sanjay-achar.png",
+            url: "/images/people/rachana-kn.jpg",
+            title: "Rachana KN",
+        },
+        {
+            url: "/images/people/om-varun-r.jpg",
+            title: "Varun Om R",
+        },          
+        {
+            url: "/images/people/zuyufulla-manna.jpg",
             title: "Zuyufulla Manna",
         },
         {
-            url: "/images/people/sanjay-achar.png",
+            url: "/images/people/ankit-jaiswal.jpg",
             title: "Ankit Jaiswal",
         },
         {
-            url: "/images/people/sanjay-achar.png",
+            url: "/images/people/sanjana-d.jpg",
             title: "Sanjana D",
         },
         {
-            url: "/images/people/sanjay-achar.png",
+            url: "/images/people/rohit-gorai.jpg",
             title: "Rohit Gorai",
         },
         {
-            url: "/images/people/sanjay-achar.png",
+            url: "/images/people/shamanth-kumar.jpg",
             title: "Shamanth V Kumar",
         },
         {
-            url: "/images/people/sanjay-achar.png",
+            url: "/images/placeholder-image.png",
             title: "Saran Kumar",
         },
         {
-            url: "/images/people/sanjay-achar.png",
+            url: "/images/placeholder-image.png",
             title: "Monish M K",
         },        
     ]
@@ -96,7 +94,7 @@ class ContributorsPage extends React.PureComponent<Props, State> {
                         <div className="radial-gradient" />
 
                         <div className="core-members">
-                            <h1 className="title">Founding members</h1>
+                            <h1 className="title">Founders</h1>
                             <div className="row">
                                 {
                                     founders.map((person, index) => (
@@ -117,7 +115,7 @@ class ContributorsPage extends React.PureComponent<Props, State> {
                                     others.map((person, index) => (
                                         <div className="col-lg-2 col-md-3 col-sm-4 col-6 person-card" key={index}>
                                             <img src={person.url} alt={person.title} className="founder-image" />
-                                            <h4 className="founder-name">{person.title}</h4>
+                                            <h4 className="contributor-name">{person.title}</h4>
                                         </div>
                                     ))
                                 }
