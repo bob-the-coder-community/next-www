@@ -97,6 +97,49 @@
             width: 100%;
             overflow: hidden;
 
+            .user-details {
+                width: 100%;
+
+                .user-details-labels {
+                    width: 100%;
+                    height: 60px;
+                    font-family: Epilogue;
+                    font-weight: 600;
+                    font-size: 14px;
+                    color: #403E47;
+                }
+
+                .next-btn {
+                    color: white;
+                    background: #FF6D45;
+                    font-weight: 0.9rem;
+                }
+
+                .user-inputs {
+                    height: 50px;
+                    font-family: Epilogue;
+                    font-weight: 500;
+                    font-size: 14px;
+                    line-height: 130%;
+                    color: #403E47;
+                    box-sizing: border-box;
+                    border-radius: 2px; 
+                    border: 0;
+                    background: #F9F9F9;
+                }
+
+                .user-inputs:hover {
+                    border: 1px solid #BFBCC6;
+                }
+
+                .user-inputs::placeholder {
+                    font-family: Epilogue;
+                    font-weight: 500;
+                    font-size: 0.9rem;
+                    color: #BFBCC6;
+                }
+            }
+
             .box {
                 width: 100px;
                 height: 100px;
