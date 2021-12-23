@@ -136,7 +136,6 @@ class Step1Page extends React.PureComponent<Props, State> {
                                     hasError={props.errors.location !== undefined}
                                 />                                                         
                                 <button type="submit" className="btn btn-primary w-100 mt-2">Next</button>
-                                {console.log(props.errors)}
                             </form>
                         )
                     }
