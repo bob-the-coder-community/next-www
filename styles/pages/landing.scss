@@ -1,0 +1,172 @@
+.landing-page {
+	.hackathon-bgs {
+		position: absolute;
+		z-index: -1;
+		width: 100%;
+	}
+
+	.hackathon-problems-bg {
+		.dark {
+			fill: #211A29
+		}
+		.light {
+			fill: #F9F6F2;
+		}
+	}
+
+	.hackathon-intro-bg {
+		left: 0;
+		top: 0;
+
+		path {
+			fill: #211A29;
+		}
+	}
+
+	.hackathon-image {
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
+	}
+
+	.hackathon-brief {
+		color: #F9F2F9;
+
+		.hackathon-date {
+			background-color: #F9F2F8;
+			text-align: center;
+			color: black;
+			font-family: "Epilogue", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+			font-weight: 500;
+			font-size: 21px;
+			line-height: 110%;
+			border-radius: 25px;
+			padding: 15px 20px;
+		}
+
+		.hackathon-title {
+			font-family: "Epilogue", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+			font-weight: 900;
+			font-size: 68px;
+			line-height: 110%;
+		}
+
+		.hackathon-brief-desc {
+			font-family: "Poppins", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+			font-weight: 500;
+			font-size: 21px;
+			line-height: 140%;
+		}
+	}
+
+	.hackathon-overview {
+		&-title {
+			font-family: "Epilogue", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+			font-weight: bolder;
+			font-size: 50px;
+			line-height: 51px;
+			color: #211A29;
+		}
+
+		&-list {
+			font-family: "Poppins", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+			font-size: 21px;
+			line-height: 140%;
+		}
+
+		&-perks {
+			font-family: "Poppins", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+			font-size: 21px;
+			line-height: 140%;
+			color: #EA3D15;
+		}
+
+
+	}
+
+	.hackathon-problems {
+		&-title {
+			font-family: "Epilogue", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+			font-weight: bolder;
+			font-size: 50px;
+			line-height: 51px;
+			color: #F9F6F2;		
+		}
+
+		&-list {
+			font-family: "Poppins", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+			font-size: 21px;
+			line-height: 140%;
+			color: #F9F6F2;		
+		}
+	}
+
+	.timeline {
+		&-title {
+			font-family: "Epilogue", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+			font-weight: 900;
+			font-size: 50px;
+			line-height: 51px;
+			color: #211A29;
+			margin-top: 15vh;
+		}
+
+		&-events {
+
+			& img {
+				width: 100%;
+				height: auto;
+				object-fit: contain;
+			}
+			
+			.event {
+				&-name {
+					font-family: "Poppins", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+					font-size: 21px;
+					line-height: 140%;
+					color: #938D85;
+				}
+		
+				&-date {
+					font-family: "Poppins", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+					font-weight: bold;
+					font-size: 21px;
+					line-height: 140%;
+					color: #35323D;
+				}
+
+				&-date-time {
+					h4 {
+						font-family: "Poppins", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+						font-weight: bold;
+						font-size: 21px;
+						line-height: 140%;
+						color: #35323D;
+					}
+				}
+			}
+		}
+	}
+
+	.sponcers {
+		&-title {
+			font-family: "Epilogue", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+			font-weight: 900;
+			font-size: 50px;
+			line-height: 51px;
+			color: #FFFFFF;
+			margin-top: 10vh;
+		}
+
+		&-row {
+			.sponcer {
+				background: white;
+				min-height: 100px;
+			}
+		}
+	}
+
+	.landing-page-lists {
+		list-style-image: url("/images/bullet.png");
+	}
+}

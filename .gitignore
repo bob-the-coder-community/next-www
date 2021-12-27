@@ -37,3 +37,6 @@ yarn-error.log*
 .env
 # Local Netlify folder
 .netlify
+
+
+dummy.txt
