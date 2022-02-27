@@ -13,7 +13,6 @@ class MyDocument extends Document {
                 <body>
                     <Main />
                     <NextScript />
-                    <script defer data-domain="bobthecoder.org" src="https://analytics.bobthecoder.org/js/plausible.js"></script>
                 </body>
             </Html>
         )
