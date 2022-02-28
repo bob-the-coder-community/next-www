@@ -1,211 +1,151 @@
 import React from 'react';
-import Image from 'next/image';
+import TeamComponent from '../components/Team';
 import Link from 'next/link';
 import Head from 'next/head';
-import { ENV } from '../const';
-import { Blogs } from '../types/Blogs';
-import PrimaryLayout from '../components/layouts/PrimaryLayout';
-import BlogsComponent from '../components/Blogs';
 
-
-type Props = {
-	blogs: Blogs[];
-}
+type Props = {};
 
 class HomePage extends React.PureComponent<Props> {
-	openTelegram(): void {
-		window.open(ENV.JoinLink, '_blank');
-		return;
-	}
-
 	render(): JSX.Element {
-		const { blogs } = this.props;
+		const Team: {
+			name: string;
+			email: string;
+			about: string;
+			image: string;
+		}[] = [
+				{ name: 'Sanjay Achar', email: 'sanjay@bobthecoder.org', image: '/images/people/sanjay-achar.png', about: 'Founder Knowhere Studio. Currently working as Senior Software Engineer.' },
+				{ name: 'Jasmine Kaur', email: 'jasmine@bobthecoder.org', image: '/images/people/jasmine-kaur.png', about: 'An MBA student, currently helping companies find right talents' },
+				{ name: 'Khushi Tomar', email: 'khushi@bobthecoder.org', image: '/images/people/khushi-tomar.png', about: 'UI/UX design intern. Currently working on bobTheCoder design system' },
+			];
 
 		return (
-			<PrimaryLayout>
+			<div className="landing-page bg-dark h-100">
 				<Head>
-					<title>bobTheCoder.org - Exclusive JavaScript Community</title>
-					<meta name="title" content="bobTheCoder - Exclusive JavaScript Community" />
-					<meta name="description" content="Bob the Coder began with the goal of providing an open community for coders. A community where all JavaScript problems, from the fundamentals to the advanced, are addressed and are freely available to everybody.🚀" />
+					<title>bobTheCoder.org - Solving Developers Pain</title>
+					<meta name="title" content="bobTheCoder.org - Solving Developers Pain" />
+					<meta name="description" content="bobTheCoder - is a community-driven platform trying to solve real-time problems of developers and start-ups. We are currently in alpha stage experimenting platform market-fit" />
 
 					<meta property="og:type" content="website" />
 					<meta property="og:url" content="https://bobthecoder.org/" />
-					<meta property="og:title" content="bobTheCoder - Exclusive JavaScript Community" />
-					<meta property="og:description" content="Bob the Coder began with the goal of providing an open community for coders. A community where all JavaScript problems, from the fundamentals to the advanced, are addressed and are freely available to everybody.🚀" />
-					<meta property="og:image" content="/images/thumbanil.jpg" />
+					<meta property="og:title" content="bobTheCoder.org - Solving Developers Pain" />
+					<meta property="og:description" content="bobTheCoder - is a community-driven platform trying to solve real-time problems of developers and start-ups. We are currently in alpha stage experimenting platform market-fit" />
 
 					<meta property="twitter:card" content="summary_large_image" />
 					<meta property="twitter:url" content="https://bobthecoder.org/" />
-					<meta property="twitter:title" content="bobTheCoder - Exclusive JavaScript Community" />
-					<meta property="twitter:description" content="Bob the Coder began with the goal of providing an open community for coders. A community where all JavaScript problems, from the fundamentals to the advanced, are addressed and are freely available to everybody.🚀" />
-					<meta property="twitter:image" content="/images/thumbanil.jpg" />
+					<meta property="twitter:title" content="bobTheCoder.org - Solving Developers Pain" />
+					<meta property="twitter:description" content="bobTheCoder - is a community-driven platform trying to solve real-time problems of developers and start-ups. We are currently in alpha stage experimenting platform market-fit" />
 				</Head>
-
-				<div className="landing-page">
-					<section className="hero-section">
-						<div className="container">
-
-							{/* Radial Container */}
-							<div className="radial-gradient" />
-
-							{/* Hero Content */}
-							<div className="d-flex flex-sm-row flex-column align-items-center justify-content-between mb-5">
-								<div className="hero-lhc">
-									<h1 className="hero-title">Bob the coder</h1>
-									<h6 className="hero-cta">
-										Exclusive community for JS developer
-									</h6>
-									<p className="hero-description">
-										bobTheCoder is one of the newest, fast growing DEV communities on the block, aiming to help you explore the world of JS with a new perspective.
-									</p>
-									<button className="btn btn-primary mt-4 px-5" onClick={this.openTelegram}>
-										Join now
-									</button>
-								</div>
-								<div className="hero-rhc d-none d-md-block">
-									<Image src={require('../public/images/main-illustration.png')} width={400} height={400} objectFit="contain" className="hero-img" />
-								</div>
-							</div>
-						</div>
+				
+				<div className="content-container">
+					{/* Letter */}
+					<section className="letter">
+						<h1>Hello,</h1>
+						<p>
+							We failed (😳 disastrously!...) scaling up
+							{' '}
+							<span className="highlight">
+								Knowhere Studio
+							</span>
+							{' '}
+							, and now we are committed to solve problem that led to our failure
+						</p>
+						<p>
+							<span className="highlight">
+								bobTheCoder
+							</span>
+							{' '}
+							is a community-driven platform trying to solve real-time problems of
+							developers and start-ups. We are currently in alpha stage
+							experimenting platform market-fit
+						</p>
+						<p>
+							We are currently working with
+							{' '}
+							<span className="highlight">
+								100+ developers
+							</span>
+							{' '}
+							and
+							{' '}
+							<span className="highlight">
+								a few start-ups
+							</span>
+						</p>
+						<p>
+							Our focus is currently on
+							{' '}
+							<span className="highlight">
+								enhancing learning experience
+							</span>
+							{' '}
+							for developers, and help companies
+							{' '}
+							<span className="highlight">
+								discover talents
+							</span>
+						</p>
 					</section>
 
-					<div className="mt-5" />
-
-					{/* Launch Letter */}
-					<section className="launch-letter mt-5 mb-5">
-						<div className="container">
-							<div className="alert alert-light mt-5">
-								<span className="pr-3">✉️</span>
-								{' '}
-								<strong>
-									Launch Letter:
-								</strong>
-								{' '}
-								Read our launch letter by our founder and community manager.
-								{' '}
-								<Link href="/launch-letter" passHref>
-									<a className="text-primary">Read more</a>
-								</Link>
-							</div>
-						</div>
-					</section>
-
-					<div className="right-background" />
-
-					{/* Why should you join */}
-					<section className="why-should-you-join mt-5 mb-5">
-						<div className="container">
-							<h1 className="section-title">Why should you join?</h1>
-							<p className="section-description">
-								Bob the coder is a fast-growing JS community in India. We help developers make the most of the ecosystem and find relevant opportunities.
-							</p>
-							<div className="row mt-5">
-								<div className="col-md-4 col-12">
-									<div className="card teal-card">
-										<p>
-											Bob The Coder as a community has also launched a new initiative to help our members get placed in some exciting new roles to help jump start their careers.
-										</p>
-										<p>
-											We have an active recruitment base to help our members find their dream jobs and connect them with some of the top companies/startups in and around the country.
-										</p>
-										<p>
-											We take care of the entire recruitment process and filter out our candidates on various levels and prepare them for some of the most challenging roles out there.
-										</p>
-									</div>
-								</div>
-								<div className="col-md-4 col-12">
-									<div className="card yellow-card">
-										<ul>
-											<li>Active community experience with daily updates on the JS world.</li>
-											<li>Intellectual discussions on everything JavaScript and more.</li>
-											<li>Blogs and quizzes for the members to help and understand JavaScript better. </li>
-										</ul>
-									</div>
-								</div>
-								<div className="col-md-4 col-12">
-									<div className="card orange-card">
-										<p>
-											We have created an evolving community of young minds to discuss and deliberate their JS queries with our experts in the community.
-										</p>
-										<p>
-											Daily updates on the happenings of JavaScript are posted on the group to keep our members up to date with the latest developments in the JS world.
-										</p>
-										<p>
-											Weekly quizzes to help improve the performance of members with challenging tasks and projects designed and developed by our team.
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</section>
-
-					{/* Daily Challange */}
-					{/* <section className="daily-challange">
-						<div className="container">
-							<div className="custom-message">
-								<div className="d-flex">
-									<div className="msg-container">
-										We have got something for you !!!
-									</div>
-									<img src="/images/wynk.png" alt="Wynk!" />
-								</div>
-							</div>
-
-							<h1 className="section-title">Your Daily Challange</h1>
-							<div className="bullets">
+					{/* Team */}
+					<section className="team">
+						<h2>#Team</h2>
+						<div className="teammates">
+							<div className="row">
 								{
-									[0, 2, 3, 4, 5].map((i) => (
-										<div className={`bullet ${i === 0 ? 'active' : ''}`} key={i}></div>
+									Team.map((member, index) => (
+										<div className={`col-md-6 col-12 ${ index > 1 && 'mt-5' }`} key={member.email}>
+											<TeamComponent {...member} />
+										</div>
 									))
 								}
-							</div>
-							<div className="questions-container">
-								<h6 className="question">
-									Q. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nisi, nec vestibulum, libero lorem. Interdum vel adipiscing ultricies laoreet euismod sit amet ante laoreet.
-								</h6>
-								<div className="answer">
-									<div className="form-group">
-										<textarea rows={10} className="form-control" data-gramm="false" placeholder={'Type your answer here'}></textarea>
-									</div>
-									<div className="d-flex flex-row">
-										<button className="btn btn-outline-primary">Reset</button>
-										<button className="btn btn btn-primary">Submit</button>
-									</div>
+
+								<div className="col-12 mt-5">
+									<h6 className="mt-2">
+										Do you want to help us solve challenges? Drop your resume
+										{' '}
+										<Link passHref href={'mailto:solve@bobthecoder.org'}>
+											<a target="_blank">
+												solve@bobthecoder.org
+											</a>
+										</Link>
+									</h6>
 								</div>
 							</div>
 						</div>
-					</section> */}
+					</section>
 
-					{/* Blogs */}
-					<BlogsComponent blogs={blogs} />
+					{/* Links */}
+					<section className="links">
+						<h2>🚀 Links</h2>
+						<ul>
+							{
+								[
+									{ name: 'GitHub', link: 'https://github.com/bob-the-coder-community', description: 'We believe in open-source. Currently, all our source code is available on GitHub for free' },
+									{ name: 'LinkedIn', link: 'https://www.linkedin.com/company/bob-the-coder', description: 'We will start posting company updates, you should definitely follow us' },
+									{ name: 'Telegram', link: 'https://join.bobthecoder.org', description: 'There is a 100+ developers community hidden in telegram! Join us now' },
+								].map((link) => (
+									<li key={link.link}>
+										<Link passHref href={link.link}>
+											<a target="_blank">
+												<h4>
+													-&gt; {link.name}
+													<small>{link.description}</small>
+												</h4>
+											</a>
+										</Link>
+									</li>
+								))
+							}
+						</ul>
+					</section>
+
+					<footer>
+						<p>© 2022 bobTheCoder. All rights reserved.</p>
+					</footer>
 				</div>
-			</PrimaryLayout>
+			</div>
 		)
 	}
-}
-
-export async function getServerSideProps() {
-    try {
-        const response = await fetch(`${ ENV.baseUrl }/blogs`, {
-            method: 'GET',
-            headers: new Headers({
-                'content-type': 'application/json',
-            }),
-        });
-
-        const data = await response.json();
-        return {
-            props: {
-                blogs: data,
-            }
-        }
-    } catch (err) {
-        return {
-            props: {
-				blogs: [],
-			}
-        }
-    }
 }
 
 export default HomePage;

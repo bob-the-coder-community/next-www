@@ -1,4 +1,5 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
+import Script from 'next/script'
 
 class MyDocument extends Document {
     static async getInitialProps(ctx: any) {
@@ -13,7 +14,19 @@ class MyDocument extends Document {
                 <body>
                     <Main />
                     <NextScript />
-                    <script defer data-domain="bobthecoder.org" src="https://analytics.bobthecoder.org/js/plausible.js"></script>
+
+                    <Script src="https://www.googletagmanager.com/gtag/js?id=G-NHJYX4HB6J" strategy="afterInteractive" />
+                    <Script id="google-analytics" strategy="afterInteractive">
+                        {`
+                            window.dataLayer = window.dataLayer || [];
+                            function gtag() {
+                                dataLayer.push(arguments);
+                            }
+                            gtag('js', new Date());
+    
+                            gtag('config', 'G-NHJYX4HB6J');                            
+                        `}
+                    </Script>
                 </body>
             </Html>
         )
