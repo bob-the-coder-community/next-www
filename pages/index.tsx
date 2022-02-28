@@ -15,6 +15,7 @@ class HomePage extends React.PureComponent<Props> {
 		}[] = [
 				{ name: 'Sanjay Achar', email: 'sanjay@bobthecoder.org', image: '/images/people/sanjay-achar.png', about: 'Founder Knowhere Studio. Currently working as Senior Software Engineer.' },
 				{ name: 'Jasmine Kaur', email: 'jasmine@bobthecoder.org', image: '/images/people/jasmine-kaur.png', about: 'An MBA student, currently helping companies find right talents' },
+				{ name: 'Khushi Tomar', email: 'khushi@bobthecoder.org', image: '/images/people/khushi-tomar.png', about: 'UI/UX design intern. Currently working on bobTheCoder design system' },
 			];
 
 		return (
@@ -91,8 +92,8 @@ class HomePage extends React.PureComponent<Props> {
 						<div className="teammates">
 							<div className="row">
 								{
-									Team.map((member) => (
-										<div className="col-md-6 col-12" key={member.email}>
+									Team.map((member, index) => (
+										<div className={`col-md-6 col-12 ${ index > 1 && 'mt-5' }`} key={member.email}>
 											<TeamComponent {...member} />
 										</div>
 									))
