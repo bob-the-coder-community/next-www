@@ -1,6 +1,7 @@
 import React from 'react';
 import TeamComponent from '../components/Team';
 import Link from 'next/link';
+import { Head } from 'next/document';
 
 type Props = {};
 
@@ -18,6 +19,22 @@ class HomePage extends React.PureComponent<Props> {
 
 		return (
 			<div className="landing-page bg-dark h-100">
+				<Head>
+					<title>bobTheCoder.org - Solving Developers Pain</title>
+					<meta name="title" content="bobTheCoder.org - Solving Developers Pain" />
+					<meta name="description" content="bobTheCoder - is a community-driven platform trying to solve real-time problems of developers and start-ups. We are currently in alpha stage experimenting platform market-fit" />
+
+					<meta property="og:type" content="website" />
+					<meta property="og:url" content="https://bobthecoder.org/" />
+					<meta property="og:title" content="bobTheCoder.org - Solving Developers Pain" />
+					<meta property="og:description" content="bobTheCoder - is a community-driven platform trying to solve real-time problems of developers and start-ups. We are currently in alpha stage experimenting platform market-fit" />
+
+					<meta property="twitter:card" content="summary_large_image" />
+					<meta property="twitter:url" content="https://bobthecoder.org/" />
+					<meta property="twitter:title" content="bobTheCoder.org - Solving Developers Pain" />
+					<meta property="twitter:description" content="bobTheCoder - is a community-driven platform trying to solve real-time problems of developers and start-ups. We are currently in alpha stage experimenting platform market-fit" />
+				</Head>
+				
 				<div className="content-container">
 					{/* Letter */}
 					<section className="letter">
@@ -59,6 +76,7 @@ class HomePage extends React.PureComponent<Props> {
 							<span className="highlight">
 								enhancing learning experience
 							</span>
+							{' '}
 							for developers, and help companies
 							{' '}
 							<span className="highlight">
@@ -121,7 +139,7 @@ class HomePage extends React.PureComponent<Props> {
 					</section>
 
 					<footer>
-						<p>© 2022 Bob the coder. All rights reserved.</p>
+						<p>© 2022 bobTheCoder. All rights reserved.</p>
 					</footer>
 				</div>
 			</div>
