@@ -1,7 +1,7 @@
 import React from 'react';
 import TeamComponent from '../components/Team';
 import Link from 'next/link';
-import { Head } from 'next/document';
+import Head from 'next/head';
 
 type Props = {};
 
