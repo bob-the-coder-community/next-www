@@ -1,0 +1,21 @@
+.navbar {
+    background-color: #fff;
+    padding: 25px 0;
+
+    .navbar-brand {
+        color: #000;
+        font-weight: bold;
+        font-size: 22px;
+        margin: 0;
+    }
+
+    .menu-items {
+        a {
+            color: #000;
+            margin: 0 20px;
+            font-weight: normal;
+            font-size: 18px;
+            text-decoration: none;
+        }
+    }
+}
