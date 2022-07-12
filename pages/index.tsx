@@ -15,10 +15,10 @@ class HomePage extends React.PureComponent<Props> {
 			about: string;
 			image: string;
 		}[] = [
-				{ name: 'Jasmine Kaur', position: 'Lead - Talent Acquisition', email: 'jasmin@bobthecoder.org', image: '/images/people/jasmine-kaur.png', about: 'Leading talents acquisition team and helping companies hire better engineers' },
-				{ name: 'Dr. Akriti Pradhan', position: 'In-house Consultant', email: 'akriti@bobthecoder.org', image: '/images/people/akriti-pradhan.png', about: 'Leading a stealth healthcare based big data project.' },
-				{ name: 'Dr. Priyanka Nath', position: 'Content Producer', email: 'priyanka@bobthecoder.org', image: '/images/people/priyanka-nath.png', about: 'Leading a stealth content production project.' },
-				{ name: 'Rhythm Bhatia', position: 'Talent Acquisition', email: 'rhythm@bobthecoder.org', image: '/images/people/rhythm-bhatia.png', about: 'Leading talents and recruiters communications.' },
+				{ name: 'Jasmine Kaur', position: 'Lead - Talent Acquisition', email: 'jasmin@bobthecoder.org', image: '/images/people/jasmine-kaur.png', about: 'I lead entire talent acquisitions and hiring process for our customers.' },
+				{ name: 'Dr. Akriti Pradhan', position: 'In-house Consultant', email: 'akriti@bobthecoder.org', image: '/images/people/akriti-pradhan.png', about: 'I bring in medicial expertise into data science. I lead a stealth healthcare project.' },
+				{ name: 'Dr. Priyanka Nath', position: 'Content Producer', email: 'priyanka@bobthecoder.org', image: '/images/people/priyanka-nath.png', about: 'Everything is content. I am producing content for an upcomming projects.' },
+				{ name: 'Rhythm Bhatia', position: 'Talent Acquisition', email: 'rhythm@bobthecoder.org', image: '/images/people/rhythm-bhatia.png', about: 'Communication is the key. I make sure they are on-time, accurate and actionable.' },
 			];
 
 		const hire = (): void => {
@@ -51,7 +51,7 @@ class HomePage extends React.PureComponent<Props> {
 							<div className="container h-100">
 								<div className="d-flex flex-column justify-content-center align-items-center hero-content">
 									<h1>Hiring your dream engineering team shouldn't be hard.</h1>
-									<p>We have sourced silicon valley calibre engineers in India to work on some of the cutting-edge technologies</p>
+									<p>Are you looking for silicon-valley caliber software engineers in India? Our team can help you find the best of them!</p>
 									<button className="btn btn-light" onClick={hire}>
 										Hire Developers.
 									</button>
@@ -67,7 +67,7 @@ class HomePage extends React.PureComponent<Props> {
 						</div>
 						<div className="clients">
 							<div className="container">
-								<h6>These companies trust us to hire best software engineers</h6>
+								<h6>These companies trust us to hire best software engineers.</h6>
 								<img src="/images/clients.png" alt="Clients" />
 							</div>
 						</div>
@@ -76,10 +76,10 @@ class HomePage extends React.PureComponent<Props> {
 						<div className="container">
 							<div className="d-flex flex-row align-items-center justify-content-between">
 								<div className="content flex-fill mr-2">
-									<h3>We are not a typical recuritment agency.</h3>
-									<p>We do not match candidate and company on as is basis. Our matching criteria is tougher and stricter than many dating apps. </p>
-									<p>Once matched, the candidates must go through a unique selection process to prove the right fit for your needs.</p>
-									<p>We generally interact with 100+ engineers for a single position, and share upto 5 profiles for further processing by your team</p>
+									<h3>We are not a typical recruitment agency.</h3>
+									<p>bobTheCoder only works with high-caliber software engineers who push boundaries in engineering. Some of the engineers we work with are building compilers, runtimes, or shipping high performant web assembly products to thousands of users.</p>
+									<p>Our matching procedure is more than if/else. Once matched, candidates will go through a live coding interview with one of our interviewers.</p>
+									<p>Typically, we jot down 50 software engineers for a single position. The competition is fierceful</p>
 								</div>
 								<div className="illustration flex-fill d-none d-lg-block">
 									<img src="/images/about-illustration.png" alt="About us" />
@@ -96,7 +96,7 @@ class HomePage extends React.PureComponent<Props> {
 								}
 							</div>
 							<h4>
-								Do you have a problem in mind? Let's solve together!
+								Do you have a problem in mind? Let's solve it together!
 								{' '}
 								Write to
 								{' '}
