@@ -16,9 +16,9 @@ class HomePage extends React.PureComponent<Props> {
 			image: string;
 		}[] = [
 				{ name: 'Jasmine Kaur', position: 'Lead - Talent Acquisition', email: 'jasmin@bobthecoder.org', image: '/images/people/jasmine-kaur.png', about: 'I lead entire talent acquisitions and hiring process for our customers.' },
-				{ name: 'Dr. Akriti Pradhan', position: 'In-house Consultant', email: 'akriti@bobthecoder.org', image: '/images/people/akriti-pradhan.png', about: 'I bring in medicial expertise into data science. I lead a stealth healthcare project.' },
-				{ name: 'Dr. Priyanka Nath', position: 'Content Producer', email: 'priyanka@bobthecoder.org', image: '/images/people/priyanka-nath.png', about: 'Everything is content. I am producing content for an upcomming projects.' },
-				{ name: 'Rhythm Bhatia', position: 'Talent Acquisition', email: 'rhythm@bobthecoder.org', image: '/images/people/rhythm-bhatia.png', about: 'Communication is the key. I make sure they are on-time, accurate and actionable.' },
+				{ name: 'Dr. Akriti Pradhan', position: 'In-house Consultant', email: 'akriti@bobthecoder.org', image: '/images/people/akriti-pradhan.jpg', about: 'I bring in medicial expertise into data science. I lead a stealth healthcare project.' },
+				{ name: 'Dr. Priyanka Nath', position: 'Content Producer', email: 'priyanka@bobthecoder.org', image: '/images/people/priyanka-nath.png', about: 'Everything is content. I am producing content for an upcoming project.' },
+				{ name: 'Rhythm Bhatia', position: 'Talent Acquisition', email: 'rhythm@bobthecoder.org', image: '/images/people/rhythm-bhatia.jpg', about: 'Communication is the key. I make sure they are on-time, accurate and actionable.' },
 			];
 
 		const hire = (): void => {
