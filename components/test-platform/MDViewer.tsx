@@ -6,7 +6,7 @@ type Props = {
 };
 
 class MarkdownViewer extends React.PureComponent<Props> {
-    render(): React.ReactNode {
+    render(): JSX.Element {
         const { text } = this.props;
         const toHTML: string = markdown.parse(text);
 

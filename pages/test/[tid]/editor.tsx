@@ -25,7 +25,7 @@ class TestPlatformEditorPage extends React.PureComponent<Props, State> {
         this.setState({ active_problem: problem });
     }
 
-    render(): React.ReactNode {
+    render(): JSX.Element {
         const { markdown, active_problem } = this.state;
 
         return (

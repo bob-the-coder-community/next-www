@@ -6,7 +6,7 @@ type Props = {};
 type State = {};
 
 export default class TestLandingPage extends React.PureComponent<Props, State> {
-    render(): React.ReactNode {
+    render(): JSX.Element {
         return (
             <div className="test-platform">
                 <div className="d-flex flex-column page-content">
