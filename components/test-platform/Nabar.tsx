@@ -7,7 +7,7 @@ type Props = {
 type State = {};
 
 class TestPlatformNavbar extends React.PureComponent<Props, State> {
-    render(): React.ReactNode {
+    render(): JSX.Element {
         const { container } = this.props;
 
         return (

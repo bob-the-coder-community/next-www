@@ -7,10 +7,10 @@ const parser = new showdown.Converter({
     })],
 });
 
-function decode(str: string): string {
+function parse(str: string): string {
     return parser.makeHtml(str);
 }
 
-export {
-    decode
+export const markdown = {
+    parse,
 }
