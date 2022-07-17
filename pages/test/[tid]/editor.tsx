@@ -1,4 +1,5 @@
 import React from 'react';
+import Monaco from '@monaco-editor/react';
 import MarkdownViewer from '../../../components/test-platform/MDViewer';
 import TestPlatformNavbar from '../../../components/test-platform/Nabar';
 
@@ -35,7 +36,7 @@ class TestPlatformEditorPage extends React.PureComponent<Props, State> {
                     <main>
                         <div className="page-content">
                             <div className="d-flex flex-row page-tabs">
-                                <div className="flex-fill lhs">
+                                <div className="flex-fill lhs page-tab">
                                     <ul className="nav">
                                         <li className="nav-item">
                                             <a className={`nav-link ${ active_problem === 'problem-1' && 'active'  }`} onClick={() => this.toggleProblem('problem-1')}>Problem #1</a>
@@ -46,12 +47,12 @@ class TestPlatformEditorPage extends React.PureComponent<Props, State> {
                                     </ul>
                                     <MarkdownViewer text={markdown} />
                                 </div>
-                                <div className="flex-fill">
-                                    {/* <Monaco
+                                <div className="flex-fill rhs page-tab">
+                                    <Monaco
                                         height={'60vh'}
                                         defaultLanguage="javascript"
                                         defaultValue="Hello, World!"
-                                    /> */}
+                                    />
                                 </div>
                             </div>
                         </div>
