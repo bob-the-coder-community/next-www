@@ -1,34 +1,41 @@
 import Link from 'next/link';
 import React from 'react';
+import { NextPageContext } from 'next';
+import { Sanity } from '../../../services/api/sanity';
+import { markdown } from '../../../services/markdown';
 import TestPlatformNavbar from '../../../components/test-platform/Nabar';
+import dayjs from 'dayjs';
 
-type Props = {};
+type Props = {
+    title: string;
+    instructions: string;
+    company: {
+        name: string;
+        website: string;
+    }
+};
 type State = {};
 
 export default class TestLandingPage extends React.PureComponent<Props, State> {
     render(): JSX.Element {
+        const { title, company, instructions } = this.props;
+
         return (
             <div className="test-platform">
                 <div className="d-flex flex-column page-content">
-                    <TestPlatformNavbar container/>
+                    <TestPlatformNavbar container />
                     <main className="flex-grow-1 h-100 bg-primary my-5">
                         <div className="container page-content">
                             <h1 className="page-title">
-                                <small>AGILITE GROUP</small>
-                                <u>Senior Software Engineer</u>
+                                <Link href={company.website}>
+                                    <small>{company.name}</small>
+                                </Link>
+                                <u>{title}</u>
                             </h1>
-                            <p className="instructions">
+                            <div className="instructions">
                                 <strong>Instructions:</strong>
-                                <ol>
-                                    <li>The examination will consist of 2 questions.</li>
-                                    <li>Total time to complete the coding challenge (both questions) is 30 mins. Please allocate your time accordingly.</li>
-                                    <li>Please make sure you have a good and stable internet connection and power source. The coding challenge cannot be paused once it begins.</li>
-                                    <li>We strongly recommend using a programming language which is more suitable for the role you are applying for.</li>
-                                    <li>Please write your code within the function provided. The code editor also includes Template Code. DO NOT EDIT that section of the code, doing so will fail your submission.</li>
-                                    <li>You can create custom test cases and test your code for different edge cases an unlimited number of times before submission.</li>
-                                    <li>You cannot edit the code once you click Submit.</li>
-                                </ol>
-                            </p>
+                                <div dangerouslySetInnerHTML={{ __html: instructions }} />
+                            </div>
                             <button className="btn btn-dark">Start now</button>
                             <p className="help-text">
                                 Notice something wrong? Write to us at
@@ -42,5 +49,55 @@ export default class TestLandingPage extends React.PureComponent<Props, State> {
                 </div>
             </div>
         )
+    }
+}
+
+export async function getServerSideProps(context: NextPageContext) {
+    const { query: { tid } } = context;
+    const tests = await Sanity.Query(`*[_type == "invitation" && _id == "${tid}"]`);
+    
+    /** Test not found */
+    if (!tests || tests.length == 0) {
+        return {
+            props: {},
+            notFound: true,
+        }
+    }
+
+    const instructions = await Sanity.Query(`*[_type == "position" && _id == "${tests[0].position[0]._ref}"]`);
+
+    /** Instructions not found */
+    if (!instructions || instructions.length == 0) {
+        return {
+            props: {},
+            notFound: true,
+        }
+    }
+
+    /** If exam is completed, then show 404 */
+    if (tests[0].state !== 'invitation-pending') {
+        return {
+            props: {},
+            notFound: true,
+        }
+    }
+
+    /** If invitation was sent 24 hours prior, send 404 */
+    if (dayjs(tests[0]._createdAt).isBefore(dayjs().add(24, 'hours'))) {
+        return {
+            props: {},
+            notFound: true,
+        }
+    }
+
+    return {
+        props: {
+            title: instructions[0].title,
+            company: {
+                name: instructions[0].company,
+                website: instructions[0].website
+            },
+            instructions: markdown.fromSanityBlock(instructions[0].instructions)
+        }, // will be passed to the page component as props
     }
 }
