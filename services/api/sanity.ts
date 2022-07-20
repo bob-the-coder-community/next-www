@@ -10,7 +10,7 @@ const client = new sanityClient({
 });
 
 const Sanity = {
-    Query: async (query: string) => {
+    Query: async (query: string): Promise<any[]> => {
         try {
             const result = await client.fetch(query, {});
             return Promise.resolve(result);

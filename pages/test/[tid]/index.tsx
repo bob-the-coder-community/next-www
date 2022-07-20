@@ -5,6 +5,8 @@ import { Sanity } from '../../../services/api/sanity';
 import { markdown } from '../../../services/markdown';
 import TestPlatformNavbar from '../../../components/test-platform/Nabar';
 import dayjs from 'dayjs';
+import httpClient from '../../../services/api/axios';
+import { AxiosResponse } from 'axios';
 
 type Props = {
     tid: string;
@@ -23,17 +25,17 @@ export default class TestLandingPage extends React.PureComponent<Props, State> {
     constructor(props: Props) {
         super(props);
         this.state = {
-            isLoading: true,
+            isLoading: false,
         }
     };
 
-    private async start(): Promise<void> {
+    async start(): Promise<void> {
         this.setState({ isLoading: true });
         try {
             const { tid } = this.props;
-            const result = await Sanity.Patch(tid, { state: 'in-progress' });
+            await httpClient.get(`/api/test/${tid}?action=start-test`);
 
-            console.log(result);
+            window.location.href = `/test/${tid}/editor`;
         } catch (err) {
             console.error(err);
         } finally {
@@ -79,20 +81,24 @@ export default class TestLandingPage extends React.PureComponent<Props, State> {
 
 export async function getServerSideProps(context: NextPageContext) {
     const { query: { tid } } = context;
-    const tests = await Sanity.Query(`*[_type == "invitation" && _id == "${tid}"]`);
+    const [
+        { data: tests },
+        { data: instructions }
+    ] = await Promise.all([
+        await httpClient.get(`/api/test/${tid}?action=get-test`) as AxiosResponse<any>,
+        await httpClient.get(`/api/test/${tid}?action=get-instructions`) as AxiosResponse<any>,
+    ]);
     
     /** Test not found */
-    if (!tests || tests.length == 0) {
+    if (!tests) {
         return {
             props: {},
             notFound: true,
         }
     }
 
-    const instructions = await Sanity.Query(`*[_type == "position" && _id == "${tests[0].position[0]._ref}"]`);
-
     /** Instructions not found */
-    if (!instructions || instructions.length == 0) {
+    if (!instructions) {
         return {
             props: {},
             notFound: true,
@@ -100,7 +106,7 @@ export async function getServerSideProps(context: NextPageContext) {
     }
 
     /** If exam is completed, then show 404 */
-    if (tests[0].state !== 'invitation-pending') {
+    if (tests.state !== 'invitation-pending') {
         return {
             props: {},
             notFound: true,
@@ -118,12 +124,12 @@ export async function getServerSideProps(context: NextPageContext) {
     return {
         props: {
             tid,
-            title: instructions[0].title,
+            title: instructions.title,
             company: {
-                name: instructions[0].company,
-                website: instructions[0].website
+                name: instructions.company,
+                website: instructions.website
             },
-            instructions: markdown.fromSanityBlock(instructions[0].instructions)
+            instructions: markdown.fromSanityBlock(instructions.instructions)
         }, // will be passed to the page component as props
     }
 }
