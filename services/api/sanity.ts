@@ -17,6 +17,14 @@ const Sanity = {
         } catch (err) {
             return Promise.reject(err);
         }
+    },
+    Patch: async (id: string, value: any) => {
+        try {
+            const result = await client.patch(id).set({ ...value }).commit();
+            return Promise.resolve(result);
+        } catch (err) {
+            return Promise.reject(err);
+        }
     }
 }
 

@@ -7,6 +7,7 @@ import TestPlatformNavbar from '../../../components/test-platform/Nabar';
 import dayjs from 'dayjs';
 
 type Props = {
+    tid: string;
     title: string;
     instructions: string;
     company: {
@@ -14,11 +15,35 @@ type Props = {
         website: string;
     }
 };
-type State = {};
+type State = {
+    isLoading: boolean;
+};
 
 export default class TestLandingPage extends React.PureComponent<Props, State> {
+    constructor(props: Props) {
+        super(props);
+        this.state = {
+            isLoading: true,
+        }
+    };
+
+    private async start(): Promise<void> {
+        this.setState({ isLoading: true });
+        try {
+            const { tid } = this.props;
+            const result = await Sanity.Patch(tid, { state: 'in-progress' });
+
+            console.log(result);
+        } catch (err) {
+            console.error(err);
+        } finally {
+            this.setState({ isLoading: false });
+        }
+    }
+
     render(): JSX.Element {
         const { title, company, instructions } = this.props;
+        const { isLoading } = this.state;
 
         return (
             <div className="test-platform">
@@ -36,7 +61,7 @@ export default class TestLandingPage extends React.PureComponent<Props, State> {
                                 <strong>Instructions:</strong>
                                 <div dangerouslySetInnerHTML={{ __html: instructions }} />
                             </div>
-                            <button className="btn btn-dark">Start now</button>
+                            <button className="btn btn-dark" disabled={isLoading} onClick={() => this.start()}>Start now</button>
                             <p className="help-text">
                                 Notice something wrong? Write to us at
                                 {' '}
@@ -83,15 +108,16 @@ export async function getServerSideProps(context: NextPageContext) {
     }
 
     /** If invitation was sent 24 hours prior, send 404 */
-    if (dayjs(tests[0]._createdAt).isBefore(dayjs().add(24, 'hours'))) {
-        return {
-            props: {},
-            notFound: true,
-        }
-    }
+    // if (dayjs(tests[0]._createdAt).isBefore(dayjs().add(24, 'hours'))) {
+    //     return {
+    //         props: {},
+    //         notFound: true,
+    //     }
+    // }
 
     return {
         props: {
+            tid,
             title: instructions[0].title,
             company: {
                 name: instructions[0].company,
