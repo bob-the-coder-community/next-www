@@ -12,7 +12,7 @@ type Props = {
     problems: {
         _id: string;
         title: string;
-        problem: any[];
+        problem: string;
         default_code: string;
     }[];
     test: {
@@ -54,7 +54,7 @@ class TestPlatformEditorPage extends React.PureComponent<Props, State> {
     getDescription(): string {
         const { problems } = this.props;
         const { active_problem } = this.state;
-        return markdown.fromSanityBlock(problems.find((problem) => problem._id == active_problem)?.problem as any[]);
+        return markdown.parse(problems.find((problem) => problem._id == active_problem)?.problem as string);
     }
 
     getSourceCode(id: string): string {

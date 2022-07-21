@@ -129,7 +129,7 @@ export async function getServerSideProps(context: NextPageContext) {
                 name: instructions.company,
                 website: instructions.website
             },
-            instructions: markdown.fromSanityBlock(instructions.instructions)
+            instructions: markdown.parse(instructions.instructions)
         }, // will be passed to the page component as props
     }
 }

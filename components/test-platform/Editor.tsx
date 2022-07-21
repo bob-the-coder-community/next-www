@@ -54,12 +54,14 @@ class TestPlatformEditor extends React.PureComponent<Props, State> {
                 return;
             }
 
-            data.result.stdout.split('\n').forEach((line: string) => {
-                results.push({ type: 'output', output: line.replace(/\s/g, '&nbsp;') })
-            });
-
-            this.setState({ logs: results });
-            return;
+            if (data.result.stdout) {
+                data.result.stdout.split('\n').forEach((line: string) => {
+                    results.push({ type: 'output', output: line.replace(/\s/g, '&nbsp;') })
+                });
+    
+                this.setState({ logs: results });
+                return;
+            }
         } catch (err) {
             console.error(err);
         } finally {
