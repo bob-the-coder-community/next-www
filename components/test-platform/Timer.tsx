@@ -9,6 +9,7 @@ type State = {
 };
 
 class TestPlatformTimer extends React.PureComponent<Props, State> {
+    Interval: any;
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -17,22 +18,26 @@ class TestPlatformTimer extends React.PureComponent<Props, State> {
     }
 
     componentDidMount() {
-        requestAnimationFrame(() => {
-            const { start } = this.props;
-            console.log(start);
-            const now = Date.now();
+        const { start } = this.props;
+        const finish = dayjs.unix(start / 1000).add(30, 'minutes').unix() * 1000;
 
-            const inMinutes = dayjs.unix(0).add(dayjs.unix(start).diff(dayjs.unix(now), 'minutes'), 'minutes').format('mm:ss');
-            console.log(inMinutes);
-            // setTimeout(() => this.componentDidMount(), 1000);
-        });
+        this.Interval = setInterval(() => {
+            const now = dayjs().unix();
+            this.setState({ elapsed: dayjs().startOf('day').add(finish - now, 'seconds').format('mm:ss') })
+        }, 1000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.Interval);
     }
 
     render(): JSX.Element {
+        const { elapsed } = this.state;
+
         return (
             <div className="test-platform-timer d-flex flex-row">
                 <img src="/images/test-platform/timer.svg" alt="Timer" />
-                <h3>30:00</h3>
+                <h3>{elapsed}</h3>
             </div>
         )
     }
