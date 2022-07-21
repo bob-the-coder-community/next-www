@@ -1,10 +1,13 @@
+import axios from "axios";
 import { NextApiRequest, NextApiResponse } from "next";
 import { Sanity } from "../../../services/api/sanity";
 
 const ACTIONS = {
     GET_INSTRUCTIONS: 'get-instructions',
     GET_TEST: 'get-test',
+    GET_PROBLEMS: 'get-problems',
     START_TEST: 'start-test',
+    EXECUTE: 'execute-program'
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -35,10 +38,29 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             return;        
         }
 
+        /** get-problems */
+        if (action === ACTIONS.GET_PROBLEMS) {
+            const problems = await Test.Get.Problem(req.query.tid as string);
+
+            if (!problems) {
+                return res.status(404).json({ message: 'not found' });
+            }
+            
+            res.status(200).json(problems);     
+            return;       
+        }
+
         /** Start Test */
         if (action === ACTIONS.START_TEST) {
             await Test.Start(req.query.tid as string);
             res.status(200).json({ message: 'success' });
+            return
+        }
+
+        /** execute-program */
+        if (action === ACTIONS.EXECUTE) {
+            const result = await Test.Execute(req.body.source_code);
+            res.status(200).json({ message: 'success', result });
             return
         }
     
@@ -76,7 +98,21 @@ const Test = {
             } catch (err) { 
                 return Promise.reject(err);
             }
-        },        
+        },
+        Problem: async (tid: string) => {
+            try {
+                const instructions = await Test.Get.Instruction(tid);
+                if (!instructions) {
+                    return Promise.reject(new Error('Instructions not found'));
+                }
+                
+                const problems = (await Sanity.Query(`*[_type == "problem" && (${instructions.problems.map((problem: { _ref: any; }) => `_id == "${problem._ref}"`).join('||')})]`))
+                return Promise.resolve(problems);
+
+            } catch (err) {
+                return Promise.reject(err);
+            }
+        }
     },
     Start: async (tid: string): Promise<any> => {
         try {
@@ -96,6 +132,22 @@ const Test = {
             
             return Promise.resolve('Exam started');
         } catch (err) {
+            return Promise.reject(err);
+        }
+    },
+    Execute: async (source_code: string): Promise<any> => {
+        try {
+            const { data } = await axios({
+                method: 'POST',
+                url: 'https://judge0.tools.bobthecoder.org/submissions/?base64_encoded=false&wait=true',
+                data: {
+                    language_id: 63,
+                    source_code,
+                }
+            });
+
+            return Promise.resolve(data);
+        } catch (err) { 
             return Promise.reject(err);
         }
     }

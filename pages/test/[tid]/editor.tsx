@@ -1,34 +1,75 @@
 import React from 'react';
-import Monaco from '@monaco-editor/react';
 import MarkdownViewer from '../../../components/test-platform/MDViewer';
 import TestPlatformNavbar from '../../../components/test-platform/Nabar';
 import TestPlatformTimer from '../../../components/test-platform/Timer';
+import { NextPageContext } from 'next';
+import httpClient from '../../../services/api/axios';
+import { AxiosResponse } from 'axios';
+import { markdown } from '../../../services/markdown';
+import TestPlatformEditor from '../../../components/test-platform/Editor';
 
-type Props = {};
+type Props = {
+    problems: {
+        _id: string;
+        title: string;
+        problem: any[];
+    }[];
+    test: {
+        meta: {
+            startTime: number;
+        };
+    }
+};
 type State = {
-    active_problem: string,
-    markdown: string;
+    active_problem: string;
+    editor_cache: {
+        problem_id: string;
+        source_code: string;
+    }[];
 };
 
 class TestPlatformEditorPage extends React.PureComponent<Props, State> {
     constructor(props: Props) {
         super(props);
         this.state = {
-            active_problem: 'problem-1',
-            markdown: ''
+            active_problem: props.problems[0]._id,
+            editor_cache: props.problems.map((problem) => ({
+                problem_id: problem._id,
+                source_code: ''
+            }))
         }
     }
 
     componentDidMount() {
-        fetch('/mock-data/test-data.md').then((d) => d.text()).then((t) => this.setState({ markdown: t })).catch(console.error);
+        console.log(this.props.test);
     }
 
     toggleProblem(problem: string): void {
         this.setState({ active_problem: problem });
     }
 
+    getDescription(): string {
+        const { problems } = this.props;
+        const { active_problem } = this.state;
+        return markdown.fromSanityBlock(problems.find((problem) => problem._id == active_problem)?.problem as any[]);
+    }
+
+    getSourceCode(id: string): string {
+        const { editor_cache } = this.state;
+        return editor_cache.find((problem) => id === problem.problem_id)?.source_code as string;
+    }
+
+    saveSourceCode(id: string, code: string): void {
+        const { editor_cache } = this.state;
+        const problemIndex = editor_cache.findIndex((problem) => id === problem.problem_id);
+
+        editor_cache[problemIndex].source_code = code;
+        this.setState({ editor_cache });
+    }
+
     render(): JSX.Element {
-        const { markdown, active_problem } = this.state;
+        const { problems, test, } = this.props;
+        const { active_problem } = this.state;
 
         return (
             <div className="test-platform-editor-page">
@@ -39,48 +80,43 @@ class TestPlatformEditorPage extends React.PureComponent<Props, State> {
                             <div className="d-flex flex-row page-tabs">
                                 <div className="flex-fill lhs page-tab">
                                     <ul className="nav">
-                                        <li className="nav-item">
-                                            <a className={`nav-link ${active_problem === 'problem-1' && 'active'}`} onClick={() => this.toggleProblem('problem-1')}>Problem #1</a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className={`nav-link ${active_problem === 'problem-2' && 'active'}`} onClick={() => this.toggleProblem('problem-2')}>Problem #2</a>
-                                        </li>
+                                        {
+                                            problems.map((problem, index: number) => (
+                                                <li className="nav-item">
+                                                    <a
+                                                        className={`nav-link ${active_problem === problem._id && 'active'}`}
+                                                        onClick={() => this.toggleProblem(problem._id)}>
+                                                        Problem #{index + 1}
+                                                    </a>
+                                                </li>
+                                            ))
+                                        }
                                     </ul>
-                                    <MarkdownViewer text={markdown} />
+                                    <MarkdownViewer
+                                        text={this.getDescription()} />
                                 </div>
                                 <div className="flex-fill rhs page-tab">
-                                    <div className="ide">
-                                        <ul className="nav">
-                                            <li className="nav-item">
-                                                <a className="nav-link file-name active">index.js</a>
-                                            </li>
-                                        </ul>
-                                        <Monaco
-                                            height={'50vh'}
-                                            defaultLanguage="javascript"
-                                            defaultValue="Hello, World!"
-                                            className="pt-1"
-                                        />
-                                    </div>
-                                    <div className="terminal">
-                                        <div className="d-flex flex-column h-100">
-                                            <ul className="nav">
-                                                <li className="nav-item">
-                                                    <a className="nav-link active">Input</a>
-                                                </li>
-                                                <li className="nav-item">
-                                                    <a className="nav-link">Output</a>
-                                                </li>
-                                            </ul>
-                                            <div className="flex-fill p-3 overflow-auto input-area" contentEditable />
-                                            <div className="terminal-footer p-2">
-                                                <div className="d-flex flex-row justify-content-between align-items-center">
-                                                    <TestPlatformTimer />
-                                                    <button className="btn btn-primary">SUBMIT</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    {
+                                        problems.map((problem) => (
+                                            <>
+                                                {
+                                                    active_problem === problem._id && (
+                                                        <TestPlatformEditor
+                                                            _id={problem._id}
+                                                            key={problem._id}
+                                                            onChange={(code) => this.saveSourceCode(problem._id, code)}
+                                                            defaultCode={this.getSourceCode(problem._id)}
+                                                        >
+                                                            <TestPlatformTimer start={test.meta.startTime} />
+                                                            <div className="actions">
+                                                                <button className="btn btn-primary">SUBMIT</button>
+                                                            </div>
+                                                        </TestPlatformEditor>
+                                                    )
+                                                }
+                                            </>
+                                        ))
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -88,6 +124,35 @@ class TestPlatformEditorPage extends React.PureComponent<Props, State> {
                 </div>
             </div>
         )
+    }
+}
+
+export async function getServerSideProps(context: NextPageContext) {
+    const { query: { tid } } = context;
+    const [
+        { data: test },
+        { data: instruction },
+        { data: problems },
+    ] = await Promise.all([
+        await httpClient.get(`/api/test/${tid}?action=get-test`) as AxiosResponse<any>,
+        await httpClient.get(`/api/test/${tid}?action=get-instructions`) as AxiosResponse<any>,
+        await httpClient.get(`/api/test/${tid}?action=get-problems`) as AxiosResponse<any>,
+    ]);
+
+    if (!test || !instruction || !problems || problems.length == 0) {
+        return {
+            props: {},
+            notFound: true,
+        }
+    }
+
+    test.meta = JSON.parse(test.meta);
+    return {
+        props: {
+            test,
+            instruction,
+            problems
+        }
     }
 }
 
