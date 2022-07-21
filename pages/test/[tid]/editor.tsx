@@ -13,6 +13,7 @@ type Props = {
         _id: string;
         title: string;
         problem: any[];
+        default_code: string;
     }[];
     test: {
         meta: {
@@ -35,9 +36,11 @@ class TestPlatformEditorPage extends React.PureComponent<Props, State> {
             active_problem: props.problems[0]._id,
             editor_cache: props.problems.map((problem) => ({
                 problem_id: problem._id,
-                source_code: ''
+                source_code: problem.default_code || ''
             }))
         }
+
+        console.log(this.state.editor_cache);
     }
 
     componentDidMount() {
@@ -56,7 +59,9 @@ class TestPlatformEditorPage extends React.PureComponent<Props, State> {
 
     getSourceCode(id: string): string {
         const { editor_cache } = this.state;
-        return editor_cache.find((problem) => id === problem.problem_id)?.source_code as string;
+        const { problems } = this.props;
+        const code = editor_cache.find((problem) => id === problem.problem_id)?.source_code as string;
+        return ((!code || code.trim() === '') ? problems.find((problem) => id === problem._id)?.default_code : code) as string;
     }
 
     saveSourceCode(id: string, code: string): void {
