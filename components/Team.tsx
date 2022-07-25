@@ -9,7 +9,7 @@ type Props = {
 };
 
 class TeamComponent extends React.PureComponent<Props> {
-    render(): React.ReactNode {
+    render(): JSX.Element {
         const { name, image, about, position } = this.props;
 
         return (

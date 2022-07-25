@@ -1,0 +1,329 @@
+@import "./component/TestPlatformNavbar";
+@import "../../markdown";
+pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 1em;
+}
+code.hljs {
+  padding: 3px 5px;
+} /*!
+  Theme: StackOverflow Light
+  Description: Light theme as used on stackoverflow.com
+  Author: stackoverflow.com
+  Maintainer: @Hirse
+  Website: https://github.com/StackExchange/Stacks
+  License: MIT
+  Updated: 2021-05-15
+
+  Updated for @stackoverflow/stacks v0.64.0
+  Code Blocks: /blob/v0.64.0/lib/css/components/_stacks-code-blocks.less
+  Colors: /blob/v0.64.0/lib/css/exports/_stacks-constants-colors.less
+*/
+.hljs {
+  color: #2f3337;
+  background: #f6f6f6;
+}
+.hljs-subst {
+  color: #2f3337;
+}
+.hljs-comment {
+  color: #656e77;
+}
+.hljs-attr,
+.hljs-doctag,
+.hljs-keyword,
+.hljs-meta .hljs-keyword,
+.hljs-section,
+.hljs-selector-tag {
+  color: #015692;
+}
+.hljs-attribute {
+  color: #803378;
+}
+.hljs-name,
+.hljs-number,
+.hljs-quote,
+.hljs-selector-id,
+.hljs-template-tag,
+.hljs-type {
+  color: #b75501;
+}
+.hljs-selector-class {
+  color: #015692;
+}
+.hljs-link,
+.hljs-regexp,
+.hljs-selector-attr,
+.hljs-string,
+.hljs-symbol,
+.hljs-template-variable,
+.hljs-variable {
+  color: #54790d;
+}
+.hljs-meta,
+.hljs-selector-pseudo {
+  color: #015692;
+}
+.hljs-built_in,
+.hljs-literal,
+.hljs-title {
+  color: #b75501;
+}
+.hljs-bullet,
+.hljs-code {
+  color: #535a60;
+}
+.hljs-meta .hljs-string {
+  color: #54790d;
+}
+.hljs-deletion {
+  color: #c02d2e;
+}
+.hljs-addition {
+  color: #2f6f44;
+}
+.hljs-emphasis {
+  font-style: italic;
+}
+.hljs-strong {
+  font-weight: 700;
+}
+
+.test-platform {
+  .page-content {
+    background-color: #fff;
+
+    .page-title {
+      font-size: 34px;
+      font-weight: normal;
+      // text-decoration: underline;
+
+      small {
+        display: block;
+        font-size: 14px;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-decoration: none;
+      }
+    }
+
+    .instructions {
+      margin: 30px 0;
+      font-size: 16px;
+      line-height: 200%;
+      color: #000;
+    }
+
+    button {
+      margin: 0 0 30px 0;
+      background-color: #000;
+      color: #fff;
+      text-transform: capitalize;
+      font-weight: 500;
+      font-size: 18px;
+      border-radius: 0;
+      opacity: 1;
+      padding: 18px 14px;
+    }
+
+    .help-text {
+      font-size: 14px;
+      color: #000;
+
+      a {
+        text-decoration: none;
+        font-weight: bold;
+        color: #000;
+      }
+    }
+  }
+}
+
+.test-platform-editor-page {
+  overflow: hidden;
+
+  .page-content {
+    .page-tab {
+      width: 50vw;
+    }
+
+    .nav {
+      border-bottom: 1px solid rgb(219, 219, 219);
+
+      a {
+        font-size: 14px;
+        text-transform: capitalize;
+        font-weight: bold;
+        color: #000;
+        opacity: 0.5;
+        cursor: pointer;
+        padding: 16px 25px;
+        line-height: 20px;
+
+        &.file-name {
+          text-transform: lowercase;
+        }
+
+        &:hover {
+          opacity: 0.8;
+        }
+
+        &.active {
+          opacity: 1;
+          border-bottom: 2px solid #000;
+        }
+      }
+    }
+
+    .lhs {
+      border-right: 1px solid rgb(219, 219, 219);
+
+      .markdown-body {
+        height: calc(100vh - 146px);
+        overflow: auto;
+      }
+    }
+
+    .rhs {
+      .terminal {
+        height: calc(100vh - 50vh - 145px);
+      }
+
+      .input-area {
+        border-bottom: 1px solid rgb(219, 219, 219);
+        background-color: #0e1525;
+        color: #fff;
+
+        &:active,
+        &:focus {
+          outline: none;
+        }
+
+        small {
+          font-size: 14px;
+          display: block;
+        }
+
+        .running {
+          color: #29a854;
+          font-weight: bold;
+        }
+
+        .error {
+          color: #ff6666;
+        }
+
+        .output {
+          color: #d4d4d4;
+        }
+
+        h6 {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .blinking-cursor {
+            width: 7px;
+            height: 16px;
+            background: #d4d4d4;
+            display: inline-block;
+            animation: cursor-blink 1.5s steps(2) infinite;
+            margin-left: 5px;
+          }
+          
+          @keyframes cursor-blink {
+            0% {
+              opacity: 0;
+            }
+          }          
+      }
+
+      .run-button {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        font-weight: bold;
+        color: #0e1525;
+        border-radius: 4px;
+
+        img {
+            width: 25px;
+            height: 25px;
+            object-fit: contain;
+            margin-right: 5px;
+            margin-left: -5px;
+        }
+        
+        &:hover {
+            background-color: rgba($color: #000000, $alpha: .1);
+        }
+      }
+
+      .btn-primary {
+        background-color: #000;
+        color: #fff;
+        text-transform: capitalize;
+        font-weight: 500;
+        font-size: 14px;
+        border-radius: 0;
+        opacity: 1;
+        padding: 14px 18px;
+
+        &:hover {
+            background-color: rgba($color: #000000, $alpha: .8);
+        }
+      }
+    }
+  }
+}
+
+.test-platform-timer {
+  cursor: pointer;
+  margin-right: 20px;
+
+  img {
+    height: 25px;
+    width: 25px;
+    object-fit: container;
+    margin-right: 10px;
+  }
+
+  h3 {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+    margin-top: 5px;
+  }
+}
+
+.test-platform-thank-you {
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  flex-direction: column;
+  color: #fff;
+  text-align: center;
+
+  h1 {
+    font-size: 48px;
+    font-weight: normal;
+    line-height: 200%;
+  }
+
+  p {
+    font-size: 18px;
+    line-height: 160%;
+    color: #fff;
+    opacity: .9;
+
+    a {
+      color: #fff;
+      font-weight: bold;
+    }
+  }
+}

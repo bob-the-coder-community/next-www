@@ -1,0 +1,16 @@
+.test-platform-navbar {
+    background-color: #000;
+    padding: 25px 0;
+
+    .brand-img img {
+        height: 40px;
+        width: auto;
+        object-fit: contain;
+    }
+
+    .close-icon img {
+        width: 20px;
+        height: 20px;
+        object-fit: contain;
+    }
+}

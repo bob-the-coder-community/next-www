@@ -5,7 +5,7 @@ type Props = {};
 type State = {};
 
 class NavbarComponent extends React.PureComponent<Props, State> {
-    render(): React.ReactNode {
+    render(): JSX.Element {
         const Links: { name: string; link: string }[] = [
             { name: 'home.', link: '/' },
             { name: 'about.', link: '/#about' },
