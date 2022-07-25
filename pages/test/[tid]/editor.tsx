@@ -88,7 +88,7 @@ class TestPlatformEditorPage extends React.PureComponent<Props, State> {
     }
 
     componentWillUnmount() {
-        clearTimeout(this.MetaTimeout);
+        this.MetaTimeout && clearTimeout(this.MetaTimeout);
     }
 
     updateMeta() {
@@ -127,11 +127,13 @@ class TestPlatformEditorPage extends React.PureComponent<Props, State> {
     async submitTest() {
         const { tid } = this.props;
         this.setState({ isSubmitting: true });
-        
+
         try {
+            clearTimeout(this.MetaTimeout)
             await httpClient.post(`/api/test/${tid}?action=submit-test`, this.state);
             window.location.href = `/test/${tid}/thank-you`
         } catch (err) {
+            this.updateMeta();
             alert('There was an error. Try again');
             console.error(err);
         } finally {

@@ -184,7 +184,7 @@ const Test = {
                 })
             });
             
-            return Promise.resolve('Exam started');
+            return Promise.resolve('Success');
         } catch (err) {
             return Promise.reject(err);
         }
@@ -194,7 +194,7 @@ const Test = {
             await Sanity.Patch(tid, {
                 state: 'completed'
             });
-            
+
             await axios({
                 method: 'POST',
                 url: 'https://friday.tools.bobthecoder.org/testPlatform/generatereport',
