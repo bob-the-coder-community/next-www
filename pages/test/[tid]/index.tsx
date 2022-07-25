@@ -7,6 +7,7 @@ import TestPlatformNavbar from '../../../components/test-platform/Nabar';
 import dayjs from 'dayjs';
 import httpClient from '../../../services/api/axios';
 import { AxiosResponse } from 'axios';
+import Head from 'next/head';
 
 type Props = {
     tid: string;
@@ -49,6 +50,9 @@ export default class TestLandingPage extends React.PureComponent<Props, State> {
 
         return (
             <div className="test-platform">
+                <Head>
+                    <title>bobTheCoder: {company.name} - {title}</title>
+                </Head>
                 <div className="d-flex flex-column page-content">
                     <TestPlatformNavbar container />
                     <main className="flex-grow-1 h-100 bg-primary my-5">
@@ -106,7 +110,7 @@ export async function getServerSideProps(context: NextPageContext) {
     }
 
     /** If exam is completed, then show 404 */
-    if (tests.state !== 'invitation-pending') {
+    if (tests.state !== 'invitation-sent') {
         return {
             props: {},
             notFound: true,

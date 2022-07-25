@@ -7,8 +7,10 @@ import httpClient from '../../../services/api/axios';
 import { AxiosResponse } from 'axios';
 import { markdown } from '../../../services/markdown';
 import TestPlatformEditor from '../../../components/test-platform/Editor';
+import dayjs from 'dayjs';
 
 type Props = {
+    tid: string;
     problems: {
         _id: string;
         title: string;
@@ -19,6 +21,11 @@ type Props = {
         meta: {
             startTime: number;
         };
+    };
+    system: {
+        os: string;
+        userAgent: string;
+        browser: string;
     }
 };
 type State = {
@@ -27,9 +34,21 @@ type State = {
         problem_id: string;
         source_code: string;
     }[];
+    system?: {
+        os: string;
+        ipAddress: string;
+        browser: string;
+        timezone: string;
+        userAgent: string;
+        screenResolution: string;
+    };
+    isTimeout: boolean;
+    isSubmitting: boolean;
 };
 
 class TestPlatformEditorPage extends React.PureComponent<Props, State> {
+    MetaTimeout: any;
+
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -37,14 +56,47 @@ class TestPlatformEditorPage extends React.PureComponent<Props, State> {
             editor_cache: props.problems.map((problem) => ({
                 problem_id: problem._id,
                 source_code: problem.default_code || ''
-            }))
+            })),
+            system: {
+                ipAddress: '',
+                timezone: '',
+                screenResolution: '',
+                browser: props.system.browser,
+                userAgent: props.system.userAgent,
+                os: props.system.os
+            },
+            isTimeout: dayjs.unix(props.test.meta.startTime).isAfter(dayjs.unix(props.test.meta.startTime).add(30, 'minutes')),
+            isSubmitting: false,
         }
 
-        console.log(this.state.editor_cache);
+        if (typeof window !== 'undefined') {
+            this.state = {
+                ...this.state,
+                system: {
+                    ...this.state.system as any,
+                    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                    screenResolution: `${window.screen.availWidth}px * ${window.screen.availHeight}px`,
+                }
+            }
+        }
+
+        console.log(this.state);
     }
 
     componentDidMount() {
-        console.log(this.props.test);
+        this.updateMeta();
+    }
+
+    componentWillUnmount() {
+        clearTimeout(this.MetaTimeout);
+    }
+
+    updateMeta() {
+        this.MetaTimeout = setTimeout(async () => {
+            const { tid } = this.props;
+            await httpClient.post(`/api/test/${tid}?action=update-meta`, this.state);
+            this.updateMeta();
+        }, 10000);
     }
 
     toggleProblem(problem: string): void {
@@ -72,9 +124,24 @@ class TestPlatformEditorPage extends React.PureComponent<Props, State> {
         this.setState({ editor_cache });
     }
 
+    async submitTest() {
+        const { tid } = this.props;
+        this.setState({ isSubmitting: true });
+        
+        try {
+            await httpClient.post(`/api/test/${tid}?action=submit-test`, this.state);
+            window.location.href = `/test/${tid}/thank-you`
+        } catch (err) {
+            alert('There was an error. Try again');
+            console.error(err);
+        } finally {
+            this.setState({ isSubmitting: false });
+        }
+    }
+
     render(): JSX.Element {
         const { problems, test, } = this.props;
-        const { active_problem } = this.state;
+        const { active_problem, isTimeout } = this.state;
 
         return (
             <div className="test-platform-editor-page">
@@ -111,10 +178,17 @@ class TestPlatformEditorPage extends React.PureComponent<Props, State> {
                                                             key={problem._id}
                                                             onChange={(code) => this.saveSourceCode(problem._id, code)}
                                                             defaultCode={this.getSourceCode(problem._id)}
+                                                            disable={isTimeout}
                                                         >
-                                                            <TestPlatformTimer start={test.meta.startTime} />
+                                                            <TestPlatformTimer
+                                                                start={test.meta.startTime}
+                                                                onComplete={() => {
+                                                                    this.setState({ isTimeout: true });
+                                                                    console.log('updating timeout');
+                                                                }}
+                                                                />
                                                             <div className="actions">
-                                                                <button className="btn btn-primary">SUBMIT</button>
+                                                                <button className="btn btn-primary" onClick={() => this.submitTest()}>SUBMIT</button>
                                                             </div>
                                                         </TestPlatformEditor>
                                                     )
@@ -151,12 +225,20 @@ export async function getServerSideProps(context: NextPageContext) {
         }
     }
 
+    console.log(context.req?.headers);
+
     test.meta = JSON.parse(test.meta);
     return {
         props: {
+            tid,
             test,
             instruction,
-            problems
+            problems,
+            system: {
+                userAgent: context.req?.headers['user-agent'],
+                browser: context.req?.headers['sec-ch-ua'],
+                os: context.req?.headers['sec-ch-ua-platform'],
+            }
         }
     }
 }

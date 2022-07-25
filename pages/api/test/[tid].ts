@@ -7,7 +7,9 @@ const ACTIONS = {
     GET_TEST: 'get-test',
     GET_PROBLEMS: 'get-problems',
     START_TEST: 'start-test',
-    EXECUTE: 'execute-program'
+    EXECUTE: 'execute-program',
+    UPDATE_META: 'update-meta',
+    SUBMIT_TEST: 'submit-test'
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -61,7 +63,21 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         if (action === ACTIONS.EXECUTE) {
             const result = await Test.Execute(req.body.source_code);
             res.status(200).json({ message: 'success', result });
-            return
+            return;
+        }
+
+        /** update-meta */
+        if (action === ACTIONS.UPDATE_META) {
+            await Test.UpdateMeta(req.query.tid as string, req.body);
+            res.status(200).json({ message: 'success' });
+            return;
+        }
+
+        if (action === ACTIONS.SUBMIT_TEST) {
+            await Test.UpdateMeta(req.query.tid as string, req.body);
+            await Test.Submit(req.query.tid as string);
+            res.status(200).json({ message: 'success' });
+            return;
         }
     
         return res.status(400).json({ message: 'Action is missing or incorrect method.' });
@@ -150,5 +166,46 @@ const Test = {
         } catch (err) { 
             return Promise.reject(err);
         }
-    }
+    },
+    UpdateMeta: async (tid: string, data: any): Promise<any> => {
+        try {
+            const test = await Test.Get.Test(tid);
+
+            if (test.state !== 'in-progress') {
+                return Promise.reject(new Error('The test stage is not right'));
+            }
+
+            await Sanity.Patch(tid, {
+                state: 'in-progress',
+                meta: JSON.stringify({
+                    ...JSON.parse(test.meta),
+                    lastSync: Date.now(),
+                    ...data,
+                })
+            });
+            
+            return Promise.resolve('Exam started');
+        } catch (err) {
+            return Promise.reject(err);
+        }
+    },
+    Submit: async (tid: string): Promise<any> => {
+        try {
+            await Sanity.Patch(tid, {
+                state: 'completed'
+            });
+            
+            await axios({
+                method: 'POST',
+                url: 'https://friday.tools.bobthecoder.org/testPlatform/generatereport',
+                data: {
+                    testId: tid,
+                }
+            });
+
+            return Promise.resolve(true);
+        } catch (err) {
+            return Promise.reject(err);
+        }
+    },
 }

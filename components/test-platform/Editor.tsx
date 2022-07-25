@@ -7,6 +7,7 @@ type Props = {
     _id: string;
     defaultCode?: string;
     onChange?: (code: string) => void;
+    disable?: boolean;
 };
 type State = {
     source_code: string;
@@ -70,7 +71,7 @@ class TestPlatformEditor extends React.PureComponent<Props, State> {
     }
 
     render(): JSX.Element {
-        const { children } = this.props;
+        const { children, disable } = this.props;
         const { source_code, running, logs } = this.state;
         const editorOptions = {
             minimap: { enabled: false },
@@ -78,6 +79,7 @@ class TestPlatformEditor extends React.PureComponent<Props, State> {
             // model: null,
             language: "javascript",
             quickSuggestions: false,
+            readOnly: disable,
         }
 
         return (
@@ -112,7 +114,7 @@ class TestPlatformEditor extends React.PureComponent<Props, State> {
                         <div className="terminal-footer p-2">
                             <div className="d-flex flex-row justify-content-between align-items-center">
                                 <div className="flex-grow-1">
-                                    <button className="btn run-button" onClick={() => this.runCode(source_code)}>
+                                    <button className="btn run-button" onClick={() => this.runCode(source_code)} disabled={disable}>
                                         <img src="/images/test-platform/run.svg" alt="RUN" />
                                         RUN
                                     </button>
