@@ -73,6 +73,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             return;
         }
 
+        /** submit test */
         if (action === ACTIONS.SUBMIT_TEST) {
             await Test.UpdateMeta(req.query.tid as string, req.body);
             await Test.Submit(req.query.tid as string);
@@ -171,9 +172,9 @@ const Test = {
         try {
             const test = await Test.Get.Test(tid);
 
-            if (test.state !== 'in-progress') {
-                return Promise.reject(new Error('The test stage is not right'));
-            }
+            // if (test.state !== 'in-progress') {
+            //     return Promise.reject(new Error('The test stage is not right'));
+            // }
 
             await Sanity.Patch(tid, {
                 state: 'in-progress',
